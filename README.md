@@ -13,5 +13,3 @@
 ### Doing Quiz & Calculate result
 
 ### CSS
-
-** Loading bar **
