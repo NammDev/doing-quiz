@@ -1,5 +1,4 @@
-import Home from '~/pages/Home'
-import Profile from '~/pages/Profile'
+import { Home, Profile } from '~/pages'
 import config from '~/config'
 
 // Don't Need Login
