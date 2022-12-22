@@ -2,24 +2,39 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
     <Navbar bg='light' expand='lg'>
       <Container>
-        <Navbar.Brand href='#home'>Hỏi Dân IT</Navbar.Brand>
+        <Link className='navbar-brand' to='/'>
+          Hỏi Dân IT
+        </Link>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse>
           <Nav className='me-auto'>
-            <Nav.Link href='#home'>Home</Nav.Link>
-            <Nav.Link href='#home'>Users</Nav.Link>
-            <Nav.Link href='#home'>Admin</Nav.Link>
+            <Link className='nav-link' to='/'>
+              Home
+            </Link>
+            <Link className='nav-link' to='/profile'>
+              Users
+            </Link>
+            <Link className='nav-link' to='/admin'>
+              Admin
+            </Link>
           </Nav>
           <Nav>
             <NavDropdown title='Settings'>
-              <NavDropdown.Item href='#action/3.1'>Log in</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.1'>Log out</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.1'>Profile</NavDropdown.Item>
+              <Link to='/' className='dropdown-item'>
+                Log in
+              </Link>
+              <Link to='/' className='dropdown-item'>
+                Log out
+              </Link>
+              <Link to='/' className='dropdown-item'>
+                Profile
+              </Link>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
