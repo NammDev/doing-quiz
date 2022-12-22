@@ -1,14 +1,18 @@
-// import styles from './Home.module.scss'
-// import classNames from 'classnames/bind'
-import { Button } from 'react-bootstrap'
+import styles from './Home.module.scss'
+import classNames from 'classnames/bind'
+import videoHome from '~/assets/videos/homepage.mp4'
 
-// const cx = classNames.bind(styles)
+const cx = classNames.bind(styles)
 
 function Home() {
   return (
-    <Button as='a' variant='success'>
-      Button as link
-    </Button>
+    <div className='home'>
+      <div className={cx('containerVideo')}>
+        <video muted autoPlay loop playsInline className={cx('video')}>
+          <source src={videoHome} type='video/mp4'></source>
+        </video>
+      </div>
+    </div>
   )
 }
 

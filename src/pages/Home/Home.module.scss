@@ -1,3 +1,11 @@
-.wrapper {
-  margin-left: 20px;
+.containerVideo {
+  height: calc(59.2708vw);
+  margin-top: -68px;
+  position: static;
+  .video {
+    display: block;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
 }

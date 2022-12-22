@@ -8,7 +8,7 @@ function MainLayout({ children }) {
   return (
     <>
       <Header />
-      <div className={cx('container')}>{children}</div>
+      <div className={cx('wrapper')}>{children}</div>
     </>
   )
 }
