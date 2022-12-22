@@ -40,4 +40,7 @@ a {
   text-decoration: none;
   vertical-align: baseline;
   cursor: pointer;
+  &:hover {
+    color: inherit;
+  }
 }

@@ -28,7 +28,10 @@
   }
   &-list {
     display: flex;
-    flex-basis: 60%;
+    flex-basis: 56%;
+  }
+  &-actions {
+    display: flex;
   }
 }
 

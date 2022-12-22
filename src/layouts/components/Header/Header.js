@@ -2,6 +2,7 @@ import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
 import { Logo } from '~/assets/svg'
+import Button from '~/components/Button'
 
 const cx = classNames.bind(styles)
 
@@ -25,13 +26,13 @@ function Header() {
             Admin
           </Link>
         </div>
-        <div>
-          <Link className='nav-link' to='/admin'>
+        <div className={cx('navbar-actions')}>
+          <Button to='/admin' outline>
             Log in
-          </Link>
-          <Link className='nav-link' to='/admin'>
+          </Button>
+          <Button to='/admin' primary>
             Sign up
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

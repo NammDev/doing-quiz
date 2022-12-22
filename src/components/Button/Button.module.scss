@@ -5,14 +5,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 88px;
   user-select: none;
   white-space: nowrap;
-  font-family: $font-primary;
   font-size: 16px;
-  line-height: 22px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid $color-primary;
   cursor: pointer;
-  &.disabled {
-    pointer-events: none;
-    opacity: 0.5;
+  width: auto;
+  transition: all 0.2s ease-out 0s;
+  &:hover {
+    opacity: 0.8;
   }
+  & + .wrapper {
+    margin-left: 16px;
+  }
+}
+
+.primary {
+  color: white;
+  background-color: $color-primary;
+  &:hover {
+    color: white;
+  }
+}
+
+.outline {
+  color: $color-primary;
+  background: transparent;
 }
