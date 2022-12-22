@@ -3,12 +3,28 @@ import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
 import { Logo } from '~/assets/svg'
 import Button from '~/components/Button'
+import { useEffect, useState } from 'react'
 
 const cx = classNames.bind(styles)
 
 function Header() {
+  const [headerBackground, setHeaderBackground] = useState('')
+
+  const handleScroll = () => {
+    if (window.scrollY > 88) {
+      return setHeaderBackground('header-bg-white')
+    } else {
+      return setHeaderBackground('')
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div className={cx('header')}>
+    <div className={cx('header', headerBackground)}>
       <div className={cx('navbar')} expand='lg'>
         <div className={cx('navbar-logo')}>
           <Link className={cx('logo')} to='/'>

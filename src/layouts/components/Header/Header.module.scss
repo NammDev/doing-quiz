@@ -6,6 +6,21 @@
   z-index: 2;
   color: rgb(38, 38, 39);
   height: 88px;
+  background-color: transparent;
+  transition: all 0.5s linear;
+  &.header-bg-white {
+    animation: onScroll 0.5s linear;
+    background-color: white;
+  }
+}
+
+@keyframes onScroll {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: white;
+  }
 }
 
 .navbar {
@@ -17,7 +32,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: transparent;
   &-logo {
     display: flex;
     align-items: center;
