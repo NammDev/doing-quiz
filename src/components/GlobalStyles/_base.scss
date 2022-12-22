@@ -2,27 +2,29 @@
 /* end Normalize.css NPM Package*/
 /* Base CSS for Tiktok */
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {
+  box-sizing: border-box;
+  height: 100%;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  font-family: $font-primary;
+  background-color: rgb(255, 255, 255);
+  color: rgb(38, 38, 39);
+  font-family: apercu-pro, sans-serif;
+  font-size: 16px;
   line-height: 1.5;
-  text-rendering: optimizeSpeed;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
+  min-height: 100%;
+  margin: 0px;
+  padding: 0px;
+  -webkit-font-smoothing: antialiased;
 }
 
 ul {
@@ -30,6 +32,12 @@ ul {
 }
 
 a {
-  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  color: inherit;
+  font-size: 100%;
+  margin: 0px;
+  padding: 0px;
   text-decoration: none;
+  vertical-align: baseline;
+  cursor: pointer;
 }
