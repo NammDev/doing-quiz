@@ -1,5 +1,5 @@
 function Admin() {
-  return <div>Admin page</div>
+  return <div className='admin'>keokoe</div>
 }
 
 export default Admin
