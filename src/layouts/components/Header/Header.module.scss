@@ -3,13 +3,13 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  z-index: 2;
+  z-index: 4;
   color: rgb(38, 38, 39);
   height: 88px;
   background-color: transparent;
-  transition: all 0.5s linear;
+  transition: all 300ms linear;
   &.header-bg-white {
-    animation: onScroll 0.5s linear;
+    animation: onScroll 300ms linear;
     background-color: white;
   }
 }

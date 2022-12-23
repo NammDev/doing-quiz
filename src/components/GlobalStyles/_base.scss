@@ -8,6 +8,15 @@
   box-sizing: inherit;
 }
 
+::-moz-selection {
+  /* Code for Firefox */
+  background-color: $color-second;
+}
+
+::selection {
+  background-color: $color-second;
+}
+
 html {
   box-sizing: border-box;
   height: 100%;
