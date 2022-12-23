@@ -1,5 +1,12 @@
+import { Sidebar } from '../components'
+
 function AdminLayout({ children }) {
-  return <div className='sidebarLayout'>{children}</div>
+  return (
+    <>
+      <Sidebar />
+      <div className='main'>{children}</div>
+    </>
+  )
 }
 
 export default AdminLayout
