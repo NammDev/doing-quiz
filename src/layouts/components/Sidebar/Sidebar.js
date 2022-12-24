@@ -1,23 +1,59 @@
-import { SidebarData } from './SidebarData'
-import './Sidebar.scss'
+import styles from './Sidebar.module.scss'
+import classnames from 'classnames/bind'
+import { Logo } from '~/assets/svg'
+import { Link } from 'react-router-dom'
+
+const cx = classnames.bind(styles)
 
 function Sidebar() {
   return (
-    <nav className={'nav-menu active'}>
-      <ul className='nav-menu-items'>
-        {SidebarData.map((item, index) => {
-          return (
-            <li key={index} className={item.cName}>
-              <div>
-                {item.icon}
-                <span>{item.title}</span>
-                {item.icon}
-              </div>
+    <aside className={cx('sidebar')}>
+      <div className={cx('sidebar-logo')}>
+        <Link className={cx('logo')} to='/'>
+          <Logo />
+        </Link>
+      </div>
+      <ul className={cx('menu-inner')}>
+        <li className={cx('menu-item', 'active')}>
+          <a className={cx('menu-link')}>
+            <div>Dashboard</div>
+          </a>
+        </li>
+        <li className={cx('menu-item')}>
+          <a className={cx('menu-link')}>
+            <div>Layouts</div>
+          </a>
+
+          <ul className={cx('menu-sub')}>
+            <li className={cx('menu-item')}>
+              <a className={cx('menu-link')}>
+                <div>Without menu</div>
+              </a>
             </li>
-          )
-        })}
+            <li className={cx('menu-item')}>
+              <a className={cx('menu-link')}>
+                <div>Without navbar</div>
+              </a>
+            </li>
+            <li className={cx('menu-item')}>
+              <a className={cx('menu-link')}>
+                <div>Container</div>
+              </a>
+            </li>
+            <li className={cx('menu-item')}>
+              <a className={cx('menu-link')}>
+                <div>Fluid</div>
+              </a>
+            </li>
+            <li className={cx('menu-item')}>
+              <a className={cx('menu-link')}>
+                <div>Blank</div>
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
-    </nav>
+    </aside>
   )
 }
 
