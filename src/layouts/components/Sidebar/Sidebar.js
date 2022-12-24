@@ -3,7 +3,6 @@ import classnames from 'classnames/bind'
 import { Logo } from '~/assets/svg'
 import { Link } from 'react-router-dom'
 import { SidebarData } from './SidebarData'
-import { useState } from 'react'
 import SubMenu from './SubMenu'
 
 const cx = classnames.bind(styles)

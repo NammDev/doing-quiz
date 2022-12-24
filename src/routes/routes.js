@@ -9,6 +9,7 @@ const publicRoutes = [
   { path: config.routes.admin, component: Admin, layout: SidebarLayout },
   { path: config.routes.dashboard, component: Dashboard, layout: SidebarLayout },
   { path: config.routes.setting, component: Setting, layout: SidebarLayout },
+  { path: config.routes.language, component: Setting, layout: SidebarLayout },
 ]
 
 // Need Login

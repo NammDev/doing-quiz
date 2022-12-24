@@ -1,21 +1,18 @@
 import styles from './Sidebar.module.scss'
 import classnames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
 const cx = classnames.bind(styles)
 
-function SubMenu({ item, index }) {
+function SubMenu({ item }) {
   const [subMenu, setSubMenu] = useState(false)
 
   const showSubMenu = () => setSubMenu(!subMenu)
+
   return (
     <>
-      <Link
-        to={item.path}
-        className={cx('menu-item', index === 2 && 'active')}
-        onClick={item.subMenu && showSubMenu}
-      >
+      <NavLink to={item.path} className={cx('menu-item')} onClick={item.subMenu && showSubMenu}>
         <div className={cx('menu-link')}>
           {item.icon}
           <div className={cx('menu-link-title')}>{item.title}</div>
@@ -23,15 +20,15 @@ function SubMenu({ item, index }) {
             {item.subMenu && subMenu ? item.iconOpened : item.subMenu ? item.iconClosed : null}
           </div>
         </div>
-      </Link>
+      </NavLink>
       {subMenu && (
         <ul className={cx('menu-sub')}>
           {item.subMenu.map((child, i) => (
-            <li key={i} className={cx('menu-item')}>
-              <a className={cx('menu-link')}>
+            <NavLink to={child.path} key={i} className={cx('menu-item')}>
+              <div className={cx('menu-link')}>
                 <div>{child.title}</div>
-              </a>
-            </li>
+              </div>
+            </NavLink>
           ))}
         </ul>
       )}

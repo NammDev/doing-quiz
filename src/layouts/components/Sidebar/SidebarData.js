@@ -23,23 +23,23 @@ export const SidebarData = [
     iconOpened: <RiIcons.RiArrowUpSFill />,
     subMenu: [
       {
-        code: 'en',
+        path: '/language/english',
         title: 'English',
       },
       {
-        code: 'vi',
+        path: '/language/viet',
         title: 'Tiếng Việt',
       },
       {
-        code: 'it',
+        path: '/language/italia',
         title: 'Italiano',
       },
       {
-        code: 'po',
+        path: '/language/polska',
         title: 'Polski (Polska)',
       },
       {
-        code: 'po',
+        path: '/language/svergie',
         title: 'Svenska (Sverige)',
       },
     ],
