@@ -13,7 +13,7 @@
   line-height: 23px;
   box-shadow: 0 4px 8px 0 rgb(161 172 184 / 12%);
   transition: width 0.3s;
-  background-color: #fffefc;
+  background-color: #ffffff;
   color: $color-primary;
   &-logo {
     padding: 0 32px;
@@ -45,15 +45,28 @@
   margin: 1px 0;
   width: 100%;
   .menu-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 0 16px;
     padding: 10px 16px;
     border-radius: 6px;
+    font-weight: 500;
+    > svg {
+      width: 24px;
+      height: 20px;
+      margin-right: 16px;
+    }
+    .menu-link-title {
+      flex: 1;
+    }
+    &:hover {
+      background: #faf7f3;
+    }
   }
   &.active {
-    .menu-link {
+    > .menu-link {
       background: $color-second;
-      font-weight: 500;
       color: #d79417;
     }
   }
@@ -62,4 +75,7 @@
 .menu-sub {
   padding-top: 5px;
   padding-bottom: 5px;
+  &.none {
+    display: none;
+  }
 }
