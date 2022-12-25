@@ -5,7 +5,7 @@ function ManageUser() {
   return (
     <>
       <h1>ManagerUser</h1>
-      <ModalComponent backdrop>
+      <ModalComponent>
         <CreateUser />
       </ModalComponent>
     </>

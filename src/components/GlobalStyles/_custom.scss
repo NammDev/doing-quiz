@@ -1,3 +1,4 @@
+// Sidebar Active Link
 .active {
   > div {
     background: $color-second;
@@ -5,10 +6,16 @@
   }
 }
 
+// Rotate SVG Component
 .svg-rotate {
   transform: rotate(90deg);
 }
 
 .svg-transition {
   transition: transform 300ms ease;
+}
+
+// Flex
+.item-start {
+  align-self: flex-start;
 }

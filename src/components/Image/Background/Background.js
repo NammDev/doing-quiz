@@ -2,6 +2,7 @@ import classNames from 'classnames/bind'
 import styles from './Background.module.scss'
 import { forwardRef } from 'react'
 
+const cx = classNames.bind(styles)
 
 function ImageBackground({ className, url, ...passProp }, ref) {
   const passStyle = () => {
