@@ -5,7 +5,17 @@ import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
-function ButtonComponent({ to, href, primary, outline, className, children, ...passProp }) {
+function ButtonComponent({
+  to,
+  href,
+  primary,
+  outline,
+  className,
+  left,
+  right,
+  children,
+  ...passProp
+}) {
   const attributes = { ...passProp }
   let Comp = 'button'
   if (to) {
@@ -28,7 +38,9 @@ function ButtonComponent({ to, href, primary, outline, className, children, ...p
 
   return (
     <Comp className={classes} {...attributes}>
-      {children}
+      {left && left}
+      <span className={cx('title')}>{children}</span>
+      {right && right}
     </Comp>
   )
 }

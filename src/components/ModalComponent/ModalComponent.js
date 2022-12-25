@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import ButtonComponent from '../Button/Button'
+import { RiAddFill } from 'react-icons/ri'
 
 function ModalComponent({ children, backdrop }) {
   const [show, setShow] = useState(false)
@@ -11,7 +12,7 @@ function ModalComponent({ children, backdrop }) {
 
   return (
     <>
-      <ButtonComponent onClick={handleShow} className='btn-color'>
+      <ButtonComponent onClick={handleShow} className='btn-color' left={<RiAddFill />}>
         Create User
       </ButtonComponent>
 
