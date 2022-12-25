@@ -25,15 +25,15 @@ export const SidebarData = [
     iconOpened: <RiIcons.RiArrowRightSLine className='svg-rotate svg-transition' />,
     subMenu: [
       {
-        path: '/manageUser',
+        path: '/admin/manage-user',
         title: 'Quản lý Users',
       },
       {
-        path: '/manageQuiz',
+        path: '/admin/manage-quiz',
         title: 'Quản lý Bài Quiz',
       },
       {
-        path: '/manageQuestion',
+        path: '/admin/manage-question',
         title: 'Quản lý Câu Hỏi',
       },
     ],

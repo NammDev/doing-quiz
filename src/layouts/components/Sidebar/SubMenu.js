@@ -13,9 +13,8 @@ function SubMenu({ item }) {
   return (
     <>
       <NavLink
-        exact
         to={item.path}
-        className={cx('menu-item', !item.path && 'disabled-active')}
+        className={cx('menu-item', item.subMenu && 'disabled-active')}
         onClick={item.subMenu && showSubMenu}
       >
         <div className={cx('menu-link')}>
