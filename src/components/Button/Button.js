@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
-function Button({ to, href, primary = true, outline, className, children, ...passProp }) {
+function ButtonComponent({ to, href, primary, outline, className, children, ...passProp }) {
   const attributes = { ...passProp }
   let Comp = 'button'
   if (to) {
@@ -33,8 +33,8 @@ function Button({ to, href, primary = true, outline, className, children, ...pas
   )
 }
 
-Button.propTypes = {
+ButtonComponent.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Button
+export default ButtonComponent

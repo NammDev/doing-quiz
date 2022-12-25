@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import ButtonComponent from '../Button/Button'
 
 function ModalComponent({ children, backdrop }) {
   const [show, setShow] = useState(false)
@@ -10,9 +11,9 @@ function ModalComponent({ children, backdrop }) {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
-        Launch demo modal
-      </Button>
+      <ButtonComponent onClick={handleShow} className='btn-color'>
+        Create User
+      </ButtonComponent>
 
       <Modal backdrop={backdrop ? 'static' : undefined} show={show} onHide={handleClose} size='lg'>
         <Modal.Header closeButton>
@@ -20,12 +21,12 @@ function ModalComponent({ children, backdrop }) {
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
+          <ButtonComponent onClick={handleClose} primary>
             Close
-          </Button>
-          <Button variant='primary' onClick={handleClose}>
-            Save Changes
-          </Button>
+          </ButtonComponent>
+          <ButtonComponent onClick={handleClose} className='btn-color'>
+            Create User
+          </ButtonComponent>
         </Modal.Footer>
       </Modal>
     </>
