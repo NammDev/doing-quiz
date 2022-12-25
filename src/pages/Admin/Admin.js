@@ -1,6 +1,5 @@
 import { adminRoutes } from '~/routes'
-import ManageUser from './ManageUser'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 function Admin() {
   return (

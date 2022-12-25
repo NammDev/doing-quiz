@@ -1,10 +1,13 @@
 import { ModalComponent } from '~/components/ModalComponent'
+import { CreateUser } from '../Form'
 
 function ManageUser() {
   return (
     <>
       <h1>ManagerUser</h1>
-      <ModalComponent />
+      <ModalComponent>
+        <CreateUser />
+      </ModalComponent>
     </>
   )
 }

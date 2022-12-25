@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  .form-group-full {
+    flex-basis: 100%;
+    padding: 8px 0;
+  }
+  .form-group-half {
+    flex-basis: 45%;
+    padding: 8px 0;
+  }
+}
