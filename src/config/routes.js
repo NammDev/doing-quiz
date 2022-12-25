@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
   profile: '/profile',
-  admin: '/admin/*',
+  admin: '/admin',
   manageQuiz: '/admin/manage-quiz',
   manageQuestion: '/admin/manage-question',
   manageUser: '/admin/manage-user',
