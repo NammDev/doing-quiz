@@ -19,47 +19,23 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
   },
   {
-    title: 'Setting',
-    path: '/setting',
+    title: 'Features',
     icon: <FaIcons.FaCartPlus />,
     iconClosed: <RiIcons.RiArrowRightSLine className='svg-transition' />,
     iconOpened: <RiIcons.RiArrowRightSLine className='svg-rotate svg-transition' />,
     subMenu: [
       {
-        path: '/language/english',
-        title: 'English',
+        path: '/manageUser',
+        title: 'Quản lý Users',
       },
       {
-        path: '/language/viet',
-        title: 'Tiếng Việt',
+        path: '/manageQuiz',
+        title: 'Quản lý Bài Quiz',
       },
       {
-        path: '/language/italia',
-        title: 'Italiano',
-      },
-      {
-        path: '/language/polska',
-        title: 'Polski (Polska)',
-      },
-      {
-        path: '/language/svergie',
-        title: 'Svenska (Sverige)',
+        path: '/manageQuestion',
+        title: 'Quản lý Câu Hỏi',
       },
     ],
-  },
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
-  },
-  {
-    title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-  },
-  {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
   },
 ]

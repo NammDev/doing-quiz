@@ -3,8 +3,9 @@ const routes = {
   profile: '/profile',
   admin: '/admin',
   dashboard: '/dashboard',
-  setting: '/setting',
-  language: '/language/:language',
+  manageQuiz: '/manageQuiz',
+  manageQuestion: '/manageQuestion',
+  manageUser: '/manageUser',
 }
 
 export default routes

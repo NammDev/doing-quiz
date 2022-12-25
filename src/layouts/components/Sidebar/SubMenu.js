@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss'
 import classnames from 'classnames/bind'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
 const cx = classnames.bind(styles)
@@ -12,7 +12,12 @@ function SubMenu({ item }) {
 
   return (
     <>
-      <NavLink to={item.path} className={cx('menu-item')} onClick={item.subMenu && showSubMenu}>
+      <NavLink
+        exact
+        to={item.path}
+        className={cx('menu-item', !item.path && 'disabled-active')}
+        onClick={item.subMenu && showSubMenu}
+      >
         <div className={cx('menu-link')}>
           {item.icon}
           <div className={cx('menu-link-title')}>{item.title}</div>

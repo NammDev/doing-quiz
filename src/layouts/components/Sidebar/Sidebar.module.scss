@@ -75,3 +75,10 @@
     display: none;
   }
 }
+
+.disabled-active {
+  .menu-link {
+    background-color: inherit;
+    color: inherit;
+  }
+}
