@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-function ModalComponent({ children }) {
+function ModalComponent({ children, backdrop }) {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -14,7 +14,7 @@ function ModalComponent({ children }) {
         Launch demo modal
       </Button>
 
-      <Modal show={show} onHide={handleClose} size='lg'>
+      <Modal backdrop={backdrop ? 'static' : undefined} show={show} onHide={handleClose} size='lg'>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
