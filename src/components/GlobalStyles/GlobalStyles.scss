@@ -4,10 +4,3 @@
 @import './base';
 @import './grid';
 @import './custom';
-
-.active {
-  > div {
-    background: $color-second;
-    color: #d79417;
-  }
-}

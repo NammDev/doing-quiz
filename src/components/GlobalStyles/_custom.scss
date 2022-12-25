@@ -1,0 +1,14 @@
+.active {
+  > div {
+    background: $color-second;
+    color: #d79417;
+  }
+}
+
+.svg-rotate {
+  transform: rotate(90deg);
+}
+
+.svg-transition {
+  transition: transform 300ms ease;
+}
