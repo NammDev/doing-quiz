@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import ButtonComponent from '../Button/Button'
 import { RiAddFill } from 'react-icons/ri'
 
-function ModalComponent({ children, backdrop }) {
+function ModalComponent({ children, onSubmit }) {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -15,7 +15,7 @@ function ModalComponent({ children, backdrop }) {
         Create User
       </ButtonComponent>
 
-      <Modal backdrop={backdrop ? 'static' : undefined} show={show} onHide={handleClose} size='lg'>
+      <Modal show={show} onHide={handleClose} size='lg'>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -24,7 +24,7 @@ function ModalComponent({ children, backdrop }) {
           <ButtonComponent onClick={handleClose} primary>
             Close
           </ButtonComponent>
-          <ButtonComponent onClick={handleClose} className='btn-color'>
+          <ButtonComponent onClick={onSubmit} className='btn-color'>
             Create User
           </ButtonComponent>
         </Modal.Footer>
