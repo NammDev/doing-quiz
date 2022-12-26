@@ -3,6 +3,9 @@ import styles from './ManageUser.module.scss'
 import { useState, useEffect } from 'react'
 import { getAllUsers } from '~/services'
 import { toast } from 'react-toastify'
+import { CiViewList } from 'react-icons/ci'
+import { BsPencilFill } from 'react-icons/bs'
+import { TiDelete } from 'react-icons/ti'
 
 const cx = classNames.bind(styles)
 
@@ -44,10 +47,16 @@ function TableUser() {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <ul>
-                  <li>View</li>
-                  <li>Update</li>
-                  <li>Delete</li>
+                <ul className={cx('table-actions')}>
+                  <li>
+                    <CiViewList size={20} />
+                  </li>
+                  <li>
+                    <BsPencilFill size={16} style={{ color: 'green' }} />
+                  </li>
+                  <li>
+                    <TiDelete size={20} style={{ color: 'red' }} />
+                  </li>
                 </ul>
               </td>
             </tr>
