@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import { ModalComponent } from '~/components/ModalComponent'
 import styles from './ManageUser.module.scss'
 import { getUser, createUser } from '~/services'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 
@@ -14,6 +15,17 @@ function ManageUser() {
   const [role, setRole] = useState('USER')
   const [previewImage, setPreviewImage] = useState('')
   const [image, setImage] = useState('')
+  const [show, setShow] = useState(false)
+
+  const handleCloseModal = () => {
+    setShow(false)
+    setEmail('')
+    setPassword('')
+    setUserName('')
+    setRole('USER')
+    setImage('')
+    setPreviewImage('')
+  }
 
   const handleUpload = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
@@ -25,12 +37,30 @@ function ManageUser() {
   }
 
   const handleSubmitCreateUser = () => {
+    let isSuccess = false
     // validate
+    const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+    const isValidateUsername = userName.length >= 6
+    const isValidatePassword = password
+    if (!isValidateEmail) {
+      toast.error('Invalid Email')
+    } else if (!isValidateUsername) {
+      toast.error('Invalid Username')
+    } else if (!isValidatePassword) {
+      toast.error('Please enter password')
+    }
+    isSuccess = isValidateEmail && isValidateUsername && isValidatePassword
+    // submit data
     const postApi = async () => {
       const res = await createUser(email, password, userName, role, image)
-      console.log(res.DT)
+      if (res && res.EC === 0) {
+        toast.success(res.EM)
+        handleCloseModal()
+      } else {
+        toast.error(res.EM)
+      }
     }
-    postApi()
+    isSuccess && postApi()
   }
 
   useEffect(() => {
@@ -44,7 +74,12 @@ function ManageUser() {
   return (
     <div className={cx('manage-user')}>
       <h2>ManagerUser</h2>
-      <ModalComponent onSubmit={handleSubmitCreateUser}>
+      <ModalComponent
+        onSubmit={handleSubmitCreateUser}
+        onClose={handleCloseModal}
+        show={show}
+        onShow={() => setShow(true)}
+      >
         <Form className={cx('form')}>
           <Form.Group className={cx('form-group-half')} controlId='userEmail'>
             <Form.Label>Email address</Form.Label>

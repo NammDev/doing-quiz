@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function Admin() {
   return (
@@ -7,6 +9,7 @@ function Admin() {
       <div className='manage'>
         <Outlet />
       </div>
+      <ToastContainer autoClose={2500} />
     </div>
   )
 }
