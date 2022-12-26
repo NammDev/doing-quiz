@@ -5,6 +5,7 @@ import { ModalComponent } from '~/components/ModalComponent'
 import styles from './ManageUser.module.scss'
 import { getUser, createUser } from '~/services'
 import { toast } from 'react-toastify'
+import TableUser from './TableUser'
 
 const cx = classNames.bind(styles)
 
@@ -16,6 +17,7 @@ function ManageUser() {
   const [previewImage, setPreviewImage] = useState('')
   const [image, setImage] = useState('')
   const [show, setShow] = useState(false)
+  const [users, setUsers] = useState([])
 
   const handleCloseModal = () => {
     setShow(false)
@@ -66,7 +68,7 @@ function ManageUser() {
   useEffect(() => {
     const fetchApi = async () => {
       const data = await getUser(1, 10)
-      console.log(data)
+      setUsers(data.DT.users)
     }
     fetchApi()
   }, [])
@@ -151,7 +153,7 @@ function ManageUser() {
           </div>
         </Form>
       </ModalComponent>
-      <p>Table User</p>
+      <TableUser users={users} />
     </div>
   )
 }
