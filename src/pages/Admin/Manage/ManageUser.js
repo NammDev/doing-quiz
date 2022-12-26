@@ -1,22 +1,38 @@
+import { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
-import { createUser } from '~/services'
 import classNames from 'classnames/bind'
+import { toast } from 'react-toastify'
+import { createUser } from '~/services'
 import { ModalComponent } from '~/components/ModalComponent'
 import styles from './ManageUser.module.scss'
-import { toast } from 'react-toastify'
 import TableUser from './TableUser'
+import { getAllUsers } from '~/services'
 
 const cx = classNames.bind(styles)
 
 function ManageUser() {
+  const [show, setShow] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userName, setUserName] = useState('')
   const [role, setRole] = useState('USER')
   const [previewImage, setPreviewImage] = useState('')
   const [image, setImage] = useState('')
-  const [show, setShow] = useState(false)
+  const [listUsers, setListUsers] = useState([])
+
+  const fetchListUsers = async () => {
+    const data = await getAllUsers()
+    if (data.EC === 0) {
+      setListUsers(data.DT)
+    } else {
+      toast(data.EM)
+    }
+  }
+
+  // render() => useEffect([])
+  useEffect(() => {
+    fetchListUsers()
+  }, [])
 
   const handleCloseModal = () => {
     setShow(false)
@@ -41,7 +57,7 @@ function ManageUser() {
     let isSuccess = false
     // validate
     const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-    const isValidateUsername = userName.length >= 6
+    const isValidateUsername = userName.length >= 3
     const isValidatePassword = password
     if (!isValidateEmail) {
       toast.error('Invalid Email')
@@ -57,7 +73,7 @@ function ManageUser() {
       if (data && data.EC === 0) {
         toast.success(data.EM)
         handleCloseModal()
-        // setListUsers((prev) => [...prev, data.DT])
+        fetchListUsers()
       } else {
         toast.error(data.EM)
       }
@@ -145,7 +161,7 @@ function ManageUser() {
           </div>
         </Form>
       </ModalComponent>
-      <TableUser />
+      <TableUser listUsers={listUsers} />
     </div>
   )
 }

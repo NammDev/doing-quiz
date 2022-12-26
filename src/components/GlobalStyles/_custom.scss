@@ -15,6 +15,10 @@
   transition: transform 300ms ease;
 }
 
+.hover-big:hover {
+  transform: scale(1.2);
+}
+
 // Flex
 .item-start {
   align-self: flex-start;
