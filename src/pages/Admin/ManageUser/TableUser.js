@@ -6,7 +6,7 @@ import { TiDelete } from 'react-icons/ti'
 
 const cx = classNames.bind(styles)
 
-function TableUser({ listUsers }) {
+function TableUser({ listUsers, onUpdate }) {
   return (
     <table className={cx('content-table')}>
       <thead>
@@ -33,7 +33,12 @@ function TableUser({ listUsers }) {
                     <AiOutlineFolderOpen size={20} className='hover-big' />
                   </li>
                   <li>
-                    <BsPencilFill size={16} className='hover-big' style={{ color: 'green' }} />
+                    <BsPencilFill
+                      size={16}
+                      className='hover-big'
+                      style={{ color: 'green' }}
+                      onClick={() => onUpdate(user)}
+                    />
                   </li>
                   <li>
                     <TiDelete size={20} className='hover-big' style={{ color: 'red' }} />
