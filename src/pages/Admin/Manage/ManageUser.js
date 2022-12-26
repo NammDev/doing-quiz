@@ -52,12 +52,12 @@ function ManageUser() {
     isSuccess = isValidateEmail && isValidateUsername && isValidatePassword
     // submit data
     const postApi = async () => {
-      const res = await createUser(email, password, userName, role, image)
-      if (res && res.EC === 0) {
-        toast.success(res.EM)
+      const data = await createUser(email, password, userName, role, image)
+      if (data && data.EC === 0) {
+        toast.success(data.EM)
         handleCloseModal()
       } else {
-        toast.error(res.EM)
+        toast.error(data.EM)
       }
     }
     isSuccess && postApi()
@@ -65,8 +65,8 @@ function ManageUser() {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getUser(1, 10)
-      // console.log(res.DT.users)
+      const data = await getUser(1, 10)
+      console.log(data)
     }
     fetchApi()
   }, [])
