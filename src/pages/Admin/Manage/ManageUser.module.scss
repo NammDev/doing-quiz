@@ -1,11 +1,11 @@
 @import 'src/components/GlobalStyles/_variables.scss';
 
 .manage-user {
-  padding: 24px;
+  padding: 24px 48px;
+  margin: 24px 48px;
   border-radius: 10px;
   box-shadow: 0 4px 20px 1px rgb(0 0 0 / 6%), 0 1px 4px rgb(0 0 0 / 8%);
   border: 0;
-  margin: 23px 24px 0 24px;
   background-color: white;
 }
 
@@ -40,7 +40,7 @@
   margin: 25px 0;
   font-size: 0.9em;
   min-width: 400px;
-  width: 85%;
+  width: 100%;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);

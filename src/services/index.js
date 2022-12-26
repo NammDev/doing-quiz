@@ -1,12 +1,17 @@
 import axios from '~/utils/axiosCustomize'
 
-export const getUser = async (page, limit) => {
+export const getAmountUsers = async (page, limit) => {
   const res = await axios.get(`/participant`, {
     params: {
       page,
       limit,
     },
   })
+  return res
+}
+
+export const getAllUsers = async () => {
+  const res = await axios.get(`/participant/all`)
   return res
 }
 

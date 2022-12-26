@@ -1,9 +1,9 @@
 import Form from 'react-bootstrap/Form'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { createUser } from '~/services'
 import classNames from 'classnames/bind'
 import { ModalComponent } from '~/components/ModalComponent'
 import styles from './ManageUser.module.scss'
-import { getUser, createUser } from '~/services'
 import { toast } from 'react-toastify'
 import TableUser from './TableUser'
 
@@ -17,7 +17,6 @@ function ManageUser() {
   const [previewImage, setPreviewImage] = useState('')
   const [image, setImage] = useState('')
   const [show, setShow] = useState(false)
-  const [users, setUsers] = useState([])
 
   const handleCloseModal = () => {
     setShow(false)
@@ -58,20 +57,13 @@ function ManageUser() {
       if (data && data.EC === 0) {
         toast.success(data.EM)
         handleCloseModal()
+        // setListUsers((prev) => [...prev, data.DT])
       } else {
         toast.error(data.EM)
       }
     }
     isSuccess && postApi()
   }
-
-  useEffect(() => {
-    const fetchApi = async () => {
-      const data = await getUser(1, 10)
-      setUsers(data.DT.users)
-    }
-    fetchApi()
-  }, [])
 
   return (
     <div className={cx('manage-user')}>
@@ -153,7 +145,7 @@ function ManageUser() {
           </div>
         </Form>
       </ModalComponent>
-      <TableUser users={users} />
+      <TableUser />
     </div>
   )
 }
