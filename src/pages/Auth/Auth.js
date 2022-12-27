@@ -1,12 +1,14 @@
 import styles from './Login.module.scss'
 import classNames from 'classnames/bind'
 import ButtonComponent from '~/components/Button'
+import { useState } from 'react'
 
 const cx = classNames.bind(styles)
 
 function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
   return (
     <main className={cx('auth')}>
       <div className={cx('auth-content')}>
@@ -16,35 +18,44 @@ function Auth() {
             <div className={cx('form-container')}>
               <div className={cx('group')}>
                 <div className={cx('label')}>Email</div>
-                <input
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                  }}
-                  type='text'
-                  placeholder='bruce@wayne.com'
-                  className={cx('email')}
-                ></input>
+                <span className={cx('inputSpan')}>
+                  <input
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                    }}
+                    type='text'
+                    placeholder='bruce@wayne.com'
+                  ></input>
+                </span>
               </div>
               <div className={cx('group')}>
                 <div className={cx('label')}>Password</div>
-                <input
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value)
-                  }}
-                  type='password'
-                  placeholder='At least 8 characters?'
-                  className={cx('password')}
-                ></input>
+                <span className={cx('inputSpan')}>
+                  <input
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                    }}
+                    type='password'
+                    placeholder='At least 8 characters?'
+                  ></input>
+                </span>
               </div>
             </div>
             <div className={cx('form-forgot')}>
-              <ButtonComponent>Forgot password?</ButtonComponent>
+              <ButtonComponent to='/' underline>
+                Forgot password?
+              </ButtonComponent>
             </div>
           </div>
           <div className={cx('form-footer')}>
-            <ButtonComponent>Log in to Typeform</ButtonComponent>
+            <input
+              type='submit'
+              className={cx('form-footer-btn')}
+              value='Log in to Typeform'
+              id='signinSubmit'
+            />
           </div>
         </form>
         <div className={cx('google-login')}>

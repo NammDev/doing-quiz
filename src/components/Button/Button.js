@@ -10,6 +10,7 @@ function ButtonComponent({
   href,
   primary,
   outline,
+  underline,
   className,
   left,
   right,
@@ -26,13 +27,10 @@ function ButtonComponent({
     Comp = 'a'
   }
 
-  if (outline) {
-    primary = false
-  }
-
   const classes = cx('wrapper', {
     primary,
     outline,
+    underline,
     [className]: className,
   })
 

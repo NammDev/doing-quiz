@@ -47,7 +47,7 @@ function Header() {
           <Button to={config.routes.login} outline>
             Log in
           </Button>
-          <Button to={config.routes.login} primary>
+          <Button to={config.routes.register} primary>
             Sign up
           </Button>
         </div>
