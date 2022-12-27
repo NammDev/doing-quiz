@@ -35,3 +35,8 @@ export const updateUser = async (id, username, role, userImage) => {
   const res = await axios.put(`/participant`, form)
   return res
 }
+
+export const deleteUser = async (id) => {
+  const res = await axios.delete('/participant', { data: { id } })
+  return res
+}

@@ -1,12 +1,11 @@
 import classNames from 'classnames/bind'
 import styles from './ManageUser.module.scss'
-import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { BsPencilFill } from 'react-icons/bs'
 import { TiDelete } from 'react-icons/ti'
 
 const cx = classNames.bind(styles)
 
-function TableUser({ listUsers, onUpdate }) {
+function TableUser({ listUsers, onUpdate, onDelete }) {
   return (
     <table className={cx('content-table')}>
       <thead>
@@ -30,9 +29,6 @@ function TableUser({ listUsers, onUpdate }) {
               <td>
                 <ul className={cx('table-actions')}>
                   <li>
-                    <AiOutlineFolderOpen size={20} className='hover-big' />
-                  </li>
-                  <li>
                     <BsPencilFill
                       size={16}
                       className='hover-big'
@@ -41,7 +37,12 @@ function TableUser({ listUsers, onUpdate }) {
                     />
                   </li>
                   <li>
-                    <TiDelete size={20} className='hover-big' style={{ color: 'red' }} />
+                    <TiDelete
+                      size={20}
+                      onClick={() => onDelete(user)}
+                      className='hover-big'
+                      style={{ color: 'red' }}
+                    />
                   </li>
                 </ul>
               </td>

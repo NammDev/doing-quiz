@@ -1,10 +1,10 @@
 import Modal from 'react-bootstrap/Modal'
 import ButtonComponent from '../Button/Button'
 
-function ModalComponent({ heading, footer, children, onSubmit, onClose, show }) {
+function ModalComponent({ heading, footer, children, onSubmit, onClose, show, size = 'lg' }) {
   return (
     <>
-      <Modal backdrop='static' show={show} size='lg' onHide={onClose}>
+      <Modal backdrop='static' show={show} size={size} onHide={onClose}>
         <Modal.Header closeButton>
           <Modal.Title>{heading}</Modal.Title>
         </Modal.Header>

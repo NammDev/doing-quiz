@@ -8,14 +8,18 @@ import ModalCreateUser from './ModalCreateUser'
 import ModalUpdateUser from './ModalUpdateUser'
 import { RiAddFill } from 'react-icons/ri'
 import ButtonComponent from '~/components/Button/Button'
+import { ModalComponent } from '~/components/ModalComponent'
+import ModalDeleteUser from './ModalDeleteUser'
 
 const cx = classNames.bind(styles)
 
 function ManageUser() {
   const [showModalCreate, setShowModalCreate] = useState(false)
   const [showModalUpdate, setShowModalUpdate] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
   const [listUsers, setListUsers] = useState([])
   const [dataUpdate, setDataUpdate] = useState({})
+  const [dataDelete, setDataDelete] = useState({})
 
   const fetchListUsers = async () => {
     const data = await getAllUsers()
@@ -33,6 +37,11 @@ function ManageUser() {
   const handleClickUpdate = (user) => {
     setShowModalUpdate(true)
     setDataUpdate(user)
+  }
+
+  const handleClickDelete = (user) => {
+    setShowModalDelete(true)
+    setDataDelete(user)
   }
 
   return (
@@ -56,7 +65,13 @@ function ManageUser() {
         fetchListUsers={fetchListUsers}
         data={dataUpdate}
       />
-      <TableUser listUsers={listUsers} onUpdate={handleClickUpdate} />
+      <ModalDeleteUser
+        show={showModalDelete}
+        setShow={setShowModalDelete}
+        data={dataDelete}
+        fetchListUsers={fetchListUsers}
+      />
+      <TableUser listUsers={listUsers} onUpdate={handleClickUpdate} onDelete={handleClickDelete} />
     </div>
   )
 }
