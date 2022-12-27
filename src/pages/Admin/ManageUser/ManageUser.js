@@ -1,38 +1,40 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { toast } from 'react-toastify'
-import { getAllUsers } from '~/services'
+import { getAmountUsers } from '~/services'
 import styles from './ManageUser.module.scss'
 import TableUser from './TableUser'
 import ModalCreateUser from './ModalCreateUser'
 import ModalUpdateUser from './ModalUpdateUser'
 import { RiAddFill } from 'react-icons/ri'
 import ButtonComponent from '~/components/Button/Button'
-import { ModalComponent } from '~/components/ModalComponent'
 import ModalDeleteUser from './ModalDeleteUser'
 
 const cx = classNames.bind(styles)
+const PAGE_LIMIT = 5
 
 function ManageUser() {
   const [showModalCreate, setShowModalCreate] = useState(false)
   const [showModalUpdate, setShowModalUpdate] = useState(false)
   const [showModalDelete, setShowModalDelete] = useState(false)
-  const [listUsers, setListUsers] = useState([])
+
   const [dataUpdate, setDataUpdate] = useState({})
   const [dataDelete, setDataDelete] = useState({})
 
-  const fetchListUsers = async () => {
-    const data = await getAllUsers()
+  const [listUsersPage, setListUsersPage] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const fetchListUsersPage = async (page) => {
+    const data = await getAmountUsers(page, PAGE_LIMIT)
     if (data.EC === 0) {
-      setListUsers(data.DT)
-    } else {
-      toast(data.EM)
+      setListUsersPage(data.DT.users)
+      setPageCount(data.DT.totalPages)
     }
   }
 
   useEffect(() => {
-    fetchListUsers()
-  }, [])
+    fetchListUsersPage(currentPage)
+  }, [currentPage])
 
   const handleClickUpdate = (user) => {
     setShowModalUpdate(true)
@@ -42,6 +44,10 @@ function ManageUser() {
   const handleClickDelete = (user) => {
     setShowModalDelete(true)
     setDataDelete(user)
+  }
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected + 1)
   }
 
   return (
@@ -57,21 +63,27 @@ function ManageUser() {
       <ModalCreateUser
         show={showModalCreate}
         setShow={setShowModalCreate}
-        fetchListUsers={fetchListUsers}
+        fetchListUsers={() => fetchListUsersPage(currentPage)}
       />
       <ModalUpdateUser
         show={showModalUpdate}
         setShow={setShowModalUpdate}
-        fetchListUsers={fetchListUsers}
+        fetchListUsers={() => fetchListUsersPage(currentPage)}
         data={dataUpdate}
       />
       <ModalDeleteUser
         show={showModalDelete}
         setShow={setShowModalDelete}
         data={dataDelete}
-        fetchListUsers={fetchListUsers}
+        fetchListUsers={() => fetchListUsersPage(currentPage)}
       />
-      <TableUser listUsers={listUsers} onUpdate={handleClickUpdate} onDelete={handleClickDelete} />
+      <TableUser
+        listUsers={listUsersPage}
+        onUpdate={handleClickUpdate}
+        onDelete={handleClickDelete}
+        pageCount={pageCount}
+        handlePageClick={handlePageClick}
+      />
     </div>
   )
 }

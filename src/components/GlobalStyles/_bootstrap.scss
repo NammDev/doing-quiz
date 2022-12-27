@@ -13,3 +13,12 @@
     padding: 16px 32px;
   }
 }
+
+.pagination {
+  --bs-pagination-color: #d79417;
+  --bs-pagination-hover-color: #d79417;
+  --bs-pagination-focus-color: #d79417;
+  --bs-pagination-active-bg: #d79417;
+  --bs-pagination-active-border-color: #d79417;
+  justify-content: center;
+}
