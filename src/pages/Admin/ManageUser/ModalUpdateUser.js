@@ -1,66 +1,68 @@
 import Form from 'react-bootstrap/Form'
 import classNames from 'classnames/bind'
 import styles from './ManageUser.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { createUser } from '~/services'
+import { updateUser } from '~/services'
 import { ModalComponent } from '~/components/ModalComponent'
 
 const cx = classNames.bind(styles)
 
-function ModalUpdateUser({ show, setShow, data }) {
-  console.log(data)
+function ModalUpdateUser({ show, setShow, data, fetchListUsers }) {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [userName, setUserName] = useState('')
   const [role, setRole] = useState('USER')
   const [previewImage, setPreviewImage] = useState('')
-  const [image, setImage] = useState('')
+  const [imageUpload, setImageUpload] = useState('')
+
+  useEffect(() => {
+    const isEmpty = Object.keys(data).length === 0
+    if (!isEmpty) {
+      const { email, username, role, image } = data
+      setEmail(email)
+      setUserName(username)
+      setRole(role)
+      image && setPreviewImage(`data:image/jpeg;base64,${image}`)
+    }
+  }, [data])
 
   const handleCloseModal = () => {
     setShow(false)
-    setEmail('')
-    setPassword('')
-    setUserName('')
-    setRole('USER')
-    setImage('')
-    setPreviewImage('')
   }
 
   const handleUpload = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
-      setImage(e.target.files[0])
+      setImageUpload(e.target.files[0])
     } else {
       setPreviewImage('')
     }
   }
 
-  const handleSubmitUpdateUser = () => {
-    let isSuccess = false
-    // validate
+  const updateApi = async () => {
+    const res = await updateUser(data.id, userName, role, imageUpload)
+    if (res && res.EC === 0) {
+      toast.success(res.EM)
+      handleCloseModal()
+      fetchListUsers()
+    } else {
+      toast.error(res.EM)
+    }
+  }
+
+  const validate = (email, userName) => {
     const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     const isValidateUsername = userName.length >= 3
-    const isValidatePassword = password
     if (!isValidateEmail) {
       toast.error('Invalid Email')
     } else if (!isValidateUsername) {
       toast.error('Invalid Username')
-    } else if (!isValidatePassword) {
-      toast.error('Please enter password')
     }
-    isSuccess = isValidateEmail && isValidateUsername && isValidatePassword
-    // submit data
-    const postApi = async () => {
-      const data = await createUser(email, password, userName, role, image)
-      if (data && data.EC === 0) {
-        toast.success(data.EM)
-        handleCloseModal()
-      } else {
-        toast.error(data.EM)
-      }
-    }
-    isSuccess && postApi()
+    return isValidateEmail && isValidateUsername
+  }
+
+  const handleSubmitUpdateUser = () => {
+    validate(email, userName) && updateApi()
   }
 
   return (
@@ -74,26 +76,12 @@ function ModalUpdateUser({ show, setShow, data }) {
       <Form className={cx('form')}>
         <Form.Group className={cx('form-group-half')} controlId='userEmail'>
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Enter email'
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value)
-            }}
-          />
+          <Form.Control disabled type='email' placeholder='Enter email' value={email} />
         </Form.Group>
 
         <Form.Group className={cx('form-group-half')} controlId='userPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value)
-            }}
-          />
+          <Form.Control type='password' disabled placeholder='Password' />
         </Form.Group>
 
         <Form.Group className={cx('form-group-half')} controlId='userName'>

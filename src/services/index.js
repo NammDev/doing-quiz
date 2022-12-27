@@ -25,3 +25,13 @@ export const createUser = async (email, password, username, role, userImage) => 
   const res = await axios.post(`/participant`, form)
   return res
 }
+
+export const updateUser = async (id, username, role, userImage) => {
+  const form = new FormData()
+  form.append('id', id)
+  form.append('username', username)
+  form.append('role', role)
+  form.append('userImage', userImage)
+  const res = await axios.put(`/participant`, form)
+  return res
+}

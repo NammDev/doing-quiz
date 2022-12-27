@@ -35,9 +35,18 @@ function ModalCreateUser({ fetchListUsers, show, setShow }) {
     }
   }
 
-  const handleSubmitCreateUser = () => {
-    let isSuccess = false
-    // validate
+  const postApi = async () => {
+    const data = await createUser(email, password, userName, role, image)
+    if (data && data.EC === 0) {
+      toast.success(data.EM)
+      handleCloseModal()
+      fetchListUsers()
+    } else {
+      toast.error(data.EM)
+    }
+  }
+
+  const validate = (email, userName, password) => {
     const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     const isValidateUsername = userName.length >= 3
     const isValidatePassword = password
@@ -48,20 +57,13 @@ function ModalCreateUser({ fetchListUsers, show, setShow }) {
     } else if (!isValidatePassword) {
       toast.error('Please enter password')
     }
-    isSuccess = isValidateEmail && isValidateUsername && isValidatePassword
-    // submit data
-    const postApi = async () => {
-      const data = await createUser(email, password, userName, role, image)
-      if (data && data.EC === 0) {
-        toast.success(data.EM)
-        handleCloseModal()
-        fetchListUsers()
-      } else {
-        toast.error(data.EM)
-      }
-    }
-    isSuccess && postApi()
+    return isValidateEmail && isValidateUsername && isValidatePassword
   }
+
+  const handleSubmitCreateUser = () => {
+    validate(email, userName, password) && postApi()
+  }
+
   return (
     <ModalComponent
       onSubmit={handleSubmitCreateUser}

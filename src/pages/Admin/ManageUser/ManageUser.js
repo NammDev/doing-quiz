@@ -50,7 +50,12 @@ function ManageUser() {
         setShow={setShowModalCreate}
         fetchListUsers={fetchListUsers}
       />
-      <ModalUpdateUser show={showModalUpdate} setShow={setShowModalUpdate} data={dataUpdate} />
+      <ModalUpdateUser
+        show={showModalUpdate}
+        setShow={setShowModalUpdate}
+        fetchListUsers={fetchListUsers}
+        data={dataUpdate}
+      />
       <TableUser listUsers={listUsers} onUpdate={handleClickUpdate} />
     </div>
   )
