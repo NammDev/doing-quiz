@@ -60,7 +60,6 @@ function ManageUser() {
   }
 
   const handleReRenderUpdate = () => {
-    setCurrentPage(currentPage)
     fetchListUsersPage(currentPage)
   }
 

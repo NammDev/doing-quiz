@@ -4,6 +4,7 @@ import styles from './Header.module.scss'
 import { Logo } from '~/assets/svg'
 import Button from '~/components/Button'
 import { useEffect, useState } from 'react'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -32,21 +33,21 @@ function Header() {
           </Link>
         </div>
         <div className={cx('navbar-list')}>
-          <Link className={cx('navbar-element')} to='/'>
+          <Link className={cx('navbar-element')} to={config.routes.home}>
             Home
           </Link>
-          <Link className={cx('navbar-element')} to='/profile'>
+          <Link className={cx('navbar-element')} to={config.routes.profile}>
             Users
           </Link>
-          <Link className={cx('navbar-element')} to='/admin'>
+          <Link className={cx('navbar-element')} to={config.routes.admin}>
             Admin
           </Link>
         </div>
         <div className={cx('navbar-actions')}>
-          <Button to='/admin' outline>
+          <Button to={config.routes.login} outline>
             Log in
           </Button>
-          <Button to='/admin' primary>
+          <Button to={config.routes.login} primary>
             Sign up
           </Button>
         </div>
