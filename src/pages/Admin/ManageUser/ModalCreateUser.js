@@ -8,7 +8,7 @@ import { ModalComponent } from '~/components/ModalComponent'
 
 const cx = classNames.bind(styles)
 
-function ModalCreateUser({ fetchListUsers, show, setShow }) {
+function ModalCreateUser({ reRender, show, setShow }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userName, setUserName] = useState('')
@@ -40,7 +40,7 @@ function ModalCreateUser({ fetchListUsers, show, setShow }) {
     if (data && data.EC === 0) {
       toast.success(data.EM)
       handleCloseModal()
-      fetchListUsers()
+      reRender()
     } else {
       toast.error(data.EM)
     }

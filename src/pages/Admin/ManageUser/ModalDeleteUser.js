@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import { deleteUser } from '~/services'
 import { ModalComponent } from '~/components/ModalComponent'
 
-function ModalDeleteUser({ show, setShow, data, fetchListUsers }) {
+function ModalDeleteUser({ show, setShow, data, reRender }) {
   const handleCloseModal = () => {
     setShow(false)
   }
@@ -12,7 +12,7 @@ function ModalDeleteUser({ show, setShow, data, fetchListUsers }) {
     if (res && res.EC === 0) {
       toast.success(res.EM)
       handleCloseModal()
-      fetchListUsers()
+      reRender()
     } else {
       toast.error(res.EM)
     }

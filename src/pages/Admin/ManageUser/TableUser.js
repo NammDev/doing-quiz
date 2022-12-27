@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate'
 
 const cx = classNames.bind(styles)
 
-function TableUser({ listUsers, onUpdate, onDelete, pageCount, handlePageClick }) {
+function TableUser({ listUsers, onUpdate, onDelete, pageCount, handlePageClick, currentPage }) {
   return (
     <>
       <table className={cx('content-table')}>
@@ -71,6 +71,7 @@ function TableUser({ listUsers, onUpdate, onDelete, pageCount, handlePageClick }
         containerClassName='pagination'
         activeClassName='active'
         renderOnZeroPageCount={null}
+        forcePage={currentPage - 1}
       />
     </>
   )

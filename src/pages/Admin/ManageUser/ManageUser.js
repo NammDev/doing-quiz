@@ -10,7 +10,7 @@ import ButtonComponent from '~/components/Button/Button'
 import ModalDeleteUser from './ModalDeleteUser'
 
 const cx = classNames.bind(styles)
-const PAGE_LIMIT = 5
+const PAGE_LIMIT = 4
 
 function ManageUser() {
   const [showModalCreate, setShowModalCreate] = useState(false)
@@ -21,7 +21,7 @@ function ManageUser() {
   const [dataDelete, setDataDelete] = useState({})
 
   const [listUsersPage, setListUsersPage] = useState([])
-  const [pageCount, setPageCount] = useState(0)
+  const [pageCount, setPageCount] = useState(1)
   const [currentPage, setCurrentPage] = useState(1)
 
   const fetchListUsersPage = async (page) => {
@@ -50,6 +50,20 @@ function ManageUser() {
     setCurrentPage(event.selected + 1)
   }
 
+  const handleReRender = () => {
+    if (currentPage === 1) {
+      setCurrentPage(1)
+      fetchListUsersPage(1)
+    } else {
+      setCurrentPage(1)
+    }
+  }
+
+  const handleReRenderUpdate = () => {
+    setCurrentPage(currentPage)
+    fetchListUsersPage(currentPage)
+  }
+
   return (
     <div className={cx('manage-user')}>
       <h2>ManagerUser</h2>
@@ -63,19 +77,19 @@ function ManageUser() {
       <ModalCreateUser
         show={showModalCreate}
         setShow={setShowModalCreate}
-        fetchListUsers={() => fetchListUsersPage(currentPage)}
+        reRender={handleReRender}
       />
       <ModalUpdateUser
         show={showModalUpdate}
         setShow={setShowModalUpdate}
-        fetchListUsers={() => fetchListUsersPage(currentPage)}
+        reRender={handleReRenderUpdate}
         data={dataUpdate}
       />
       <ModalDeleteUser
         show={showModalDelete}
         setShow={setShowModalDelete}
         data={dataDelete}
-        fetchListUsers={() => fetchListUsersPage(currentPage)}
+        reRender={handleReRender}
       />
       <TableUser
         listUsers={listUsersPage}
@@ -83,6 +97,7 @@ function ManageUser() {
         onDelete={handleClickDelete}
         pageCount={pageCount}
         handlePageClick={handlePageClick}
+        currentPage={currentPage}
       />
     </div>
   )
