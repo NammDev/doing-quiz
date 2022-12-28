@@ -3,6 +3,7 @@ import { publicRoutes, adminRoutes } from '~/routes'
 import classNames from 'classnames/bind'
 import styles from './App.module.scss'
 import config from '~/config'
+import { ToastContainer } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 
@@ -34,6 +35,7 @@ function App() {
           })}
         </Routes>
       </div>
+      <ToastContainer autoClose={2000} />
     </Router>
   )
 }

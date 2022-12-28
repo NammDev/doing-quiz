@@ -1,17 +1,54 @@
-import styles from './Register.module.scss'
+import { useState } from 'react'
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Logo } from '~/assets/svg'
 import ButtonComponent from '~/components/Button'
 import config from '~/config'
-import { useState } from 'react'
+import { postRegister } from '~/services/auth'
+import styles from './Register.module.scss'
+import { ImEye, ImEyeBlocked } from 'react-icons/im'
 
 const cx = classNames.bind(styles)
 
 function Register() {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('')
   const [isChecked, setIsChecked] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+
+  const postApi = async () => {
+    const data = await postRegister(email, username, password)
+    if (data && data.EC === 0) {
+      toast.success(data.EM)
+      navigate(config.routes.login)
+    } else {
+      toast.error(data.EM)
+    }
+  }
+
+  const validate = (email, username, password) => {
+    const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+    const isValidateusername = username.length >= 3
+    const isValidatePassword = password
+    if (!isValidateEmail) {
+      toast.error('Invalid Email')
+    } else if (!isValidateusername) {
+      toast.error('Invalid Username')
+    } else if (!isValidatePassword) {
+      toast.error('Please enter password')
+    } else if (!isChecked) {
+      toast.error('You have to agree with our term!')
+    }
+    return isValidateEmail && isValidateusername && isValidatePassword && isChecked
+  }
+
+  const handleLogin = () => {
+    validate(email, username, password) && postApi()
+  }
 
   return (
     <div className={cx('page')}>
@@ -47,7 +84,7 @@ function Register() {
             </div>
             <main className={cx('auth')}>
               <div className={cx('auth-content')}>
-                <form className={cx('form-login')}>
+                <div className={cx('form-login')}>
                   <h2 className={cx('form-head')}>
                     Get better data with conversational forms, surveys, quizzes & more.
                   </h2>
@@ -67,6 +104,19 @@ function Register() {
                         </span>
                       </div>
                       <div className={cx('group')}>
+                        <div className={cx('label')}>Username</div>
+                        <span className={cx('inputSpan')}>
+                          <input
+                            value={username}
+                            onChange={(e) => {
+                              setUsername(e.target.value)
+                            }}
+                            type='text'
+                            placeholder='Username Brune Lee'
+                          ></input>
+                        </span>
+                      </div>
+                      <div className={cx('group')}>
                         <div className={cx('label')}>Password</div>
                         <span className={cx('inputSpan')}>
                           <input
@@ -74,9 +124,12 @@ function Register() {
                             onChange={(e) => {
                               setPassword(e.target.value)
                             }}
-                            type='password'
+                            type={showPassword ? 'text' : 'password'}
                             placeholder='At least 8 characters?'
                           ></input>
+                          <span onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <ImEye /> : <ImEyeBlocked />}
+                          </span>
                         </span>
                       </div>
                     </div>
@@ -95,15 +148,16 @@ function Register() {
                       </label>
                     </div>
                     <div className={cx('form-footer')}>
-                      <input
-                        type='submit'
+                      <ButtonComponent
+                        onClick={handleLogin}
                         className={cx('form-footer-btn')}
-                        value='Create my free account'
                         id='signinSubmit'
-                      />
+                      >
+                        Create my free account
+                      </ButtonComponent>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </main>
           </div>

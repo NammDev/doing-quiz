@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import styles from './ManageUser.module.scss'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { createUser } from '~/services'
+import { createUser } from '~/services/users'
 import { ModalComponent } from '~/components/ModalComponent'
 
 const cx = classNames.bind(styles)

@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { deleteUser } from '~/services'
+import { deleteUser } from '~/services/users'
 import { ModalComponent } from '~/components/ModalComponent'
 
 function ModalDeleteUser({ show, setShow, data, reRender }) {

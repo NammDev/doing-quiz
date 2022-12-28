@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { getAmountUsers } from '~/services'
+import { getAmountUsers } from '~/services/users'
 import styles from './ManageUser.module.scss'
 import TableUser from './TableUser'
 import ModalCreateUser from './ModalCreateUser'
