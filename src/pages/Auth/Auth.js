@@ -9,6 +9,7 @@ import config from '~/config'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
 import { useDispatch } from 'react-redux'
 import { doLogin } from '~/redux/actions/userAction'
+import { ImSpinner2 } from 'react-icons/im'
 
 const cx = classNames.bind(styles)
 
@@ -19,26 +20,24 @@ function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const postApi = async () => {
+    setIsLoading(true)
     const data = await postLogin(email, password)
     if (data && data.EC === 0) {
-      toast.success(data.EM)
       dispatch(doLogin(data.DT))
+      toast.success(data.EM)
       navigate(config.routes.home)
     } else {
       toast.error(data.EM)
     }
+    setIsLoading(false)
   }
 
   const validate = (email, password) => {
     const isValidateEmail = email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
     const isValidatePassword = password
-    if (!isValidateEmail) {
-      toast.error('Invalid Email', { autoClose: 1000 })
-    } else if (!isValidatePassword) {
-      toast.error('Please enter password')
-    }
     return isValidateEmail && isValidatePassword
   }
 
@@ -75,6 +74,7 @@ function Auth() {
                       setPassword(e.target.value)
                     }}
                     type={showPassword ? 'text' : 'password'}
+                    autoComplete='on'
                     placeholder='At least 8 characters?'
                   ></input>
                   <span
@@ -97,6 +97,7 @@ function Auth() {
               onClick={handleLogin}
               className={cx('form-footer-btn')}
               id='signinSubmit'
+              left={isLoading && <ImSpinner2 />}
             >
               Log in to Typeform
             </ButtonComponent>

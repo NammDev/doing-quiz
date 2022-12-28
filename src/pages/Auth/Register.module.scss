@@ -178,6 +178,21 @@
     &:hover {
       opacity: 0.9;
     }
+    svg {
+      animation: spin 400ms linear infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+      margin-right: 4px;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

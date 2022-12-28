@@ -8,6 +8,7 @@ import config from '~/config'
 import { postRegister } from '~/services/auth'
 import styles from './Register.module.scss'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
+import { ImSpinner2 } from 'react-icons/im'
 
 const cx = classNames.bind(styles)
 
@@ -19,8 +20,10 @@ function Register() {
   const [username, setUsername] = useState('')
   const [isChecked, setIsChecked] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const postApi = async () => {
+    setIsLoading(true)
     const data = await postRegister(email, username, password)
     if (data && data.EC === 0) {
       toast.success(data.EM)
@@ -28,6 +31,7 @@ function Register() {
     } else {
       toast.error(data.EM)
     }
+    setIsLoading(false)
   }
 
   const validate = (email, username, password) => {
@@ -155,6 +159,7 @@ function Register() {
                         onClick={handleLogin}
                         className={cx('form-footer-btn')}
                         id='signinSubmit'
+                        left={isLoading && <ImSpinner2 />}
                       >
                         Create my free account
                       </ButtonComponent>

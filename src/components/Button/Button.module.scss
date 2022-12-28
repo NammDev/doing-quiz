@@ -23,10 +23,11 @@ svg + .title,
   transition: all 0.2s ease-out 0s;
   min-width: 32px;
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
   &.disabled {
     pointer-events: none;
+    opacity: 0.6;
   }
 }
 
