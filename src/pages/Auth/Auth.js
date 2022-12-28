@@ -7,11 +7,13 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import config from '~/config'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
+import { useDispatch } from 'react-redux'
 
 const cx = classNames.bind(styles)
 
 function Auth() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,6 +23,7 @@ function Auth() {
     const data = await postLogin(email, password)
     if (data && data.EC === 0) {
       toast.success(data.EM)
+      dispatch({ type: 'FETCH_USER_LOGIN_SUCCESS', payload: data })
       navigate(config.routes.home)
     } else {
       toast.error(data.EM)
