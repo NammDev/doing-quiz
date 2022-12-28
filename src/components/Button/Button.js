@@ -11,6 +11,7 @@ function ButtonComponent({
   primary,
   outline,
   underline,
+  disabled,
   className,
   left,
   right,
@@ -27,10 +28,20 @@ function ButtonComponent({
     Comp = 'a'
   }
 
+  // Remove event listener when btn is disabled
+  if (disabled) {
+    Object.keys(attributes).forEach((key) => {
+      if (key.startsWith('on') && typeof attributes[key] === 'function') {
+        delete attributes[key]
+      }
+    })
+  }
+
   const classes = cx('wrapper', {
     primary,
     outline,
     underline,
+    disabled,
     [className]: className,
   })
 

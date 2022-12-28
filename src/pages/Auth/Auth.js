@@ -58,11 +58,19 @@ function Auth() {
             />
           </div>
         </form>
-        <div className={cx('google-login')}>
-          <span>OR</span>
-          <ButtonComponent>Log in with Google</ButtonComponent>
-          <ButtonComponent>Log in with Micosoft</ButtonComponent>
-          <ButtonComponent>Log in with SSO</ButtonComponent>
+        <div className={cx('custom-login')}>
+          <div className={cx('custom-login-or')}>
+            <span>OR</span>
+          </div>
+          <ButtonComponent to='#' className={cx('custom-login-google')}>
+            Log in with Google
+          </ButtonComponent>
+          <ButtonComponent to='#' className={cx('custom-login-mic')}>
+            Log in with Micosoft
+          </ButtonComponent>
+          <ButtonComponent to='#' underline className={cx('custom-login-sso')}>
+            Log in with SSO
+          </ButtonComponent>
         </div>
       </div>
     </main>

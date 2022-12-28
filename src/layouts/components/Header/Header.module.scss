@@ -46,6 +46,9 @@
   }
   &-actions {
     display: flex;
+    a:first-child {
+      margin-right: 16px;
+    }
   }
 }
 
