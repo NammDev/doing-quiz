@@ -6,6 +6,7 @@ import { postLogin } from '~/services/auth'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import config from '~/config'
+import { ImEye, ImEyeBlocked } from 'react-icons/im'
 
 const cx = classNames.bind(styles)
 
@@ -14,6 +15,7 @@ function Auth() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const postApi = async () => {
     const data = await postLogin(email, password)
@@ -68,9 +70,15 @@ function Auth() {
                     onChange={(e) => {
                       setPassword(e.target.value)
                     }}
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     placeholder='At least 8 characters?'
                   ></input>
+                  <span
+                    className={cx('show-password')}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <ImEyeBlocked /> : <ImEye />}
+                  </span>
                 </span>
               </div>
             </div>

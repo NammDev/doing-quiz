@@ -127,8 +127,11 @@ function Register() {
                             type={showPassword ? 'text' : 'password'}
                             placeholder='At least 8 characters?'
                           ></input>
-                          <span onClick={() => setShowPassword(!showPassword)}>
-                            {showPassword ? <ImEye /> : <ImEyeBlocked />}
+                          <span
+                            className={cx('show-password')}
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? <ImEyeBlocked /> : <ImEye />}
                           </span>
                         </span>
                       </div>
