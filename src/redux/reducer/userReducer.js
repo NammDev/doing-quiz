@@ -15,12 +15,10 @@ const initialState = {
 const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_USER_LOGIN_SUCCESS: {
-      if (payload.EC === 0) {
-        return {
-          ...state,
-          isAuthenticated: true,
-          account: { ...payload?.DT },
-        }
+      return {
+        ...state,
+        isAuthenticated: true,
+        account: { ...payload },
       }
     }
     default:

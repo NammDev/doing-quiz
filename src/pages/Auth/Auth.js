@@ -24,7 +24,7 @@ function Auth() {
     const data = await postLogin(email, password)
     if (data && data.EC === 0) {
       toast.success(data.EM)
-      dispatch(doLogin(data))
+      dispatch(doLogin(data.DT))
       navigate(config.routes.home)
     } else {
       toast.error(data.EM)
