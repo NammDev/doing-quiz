@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import config from '~/config'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
 import { useDispatch } from 'react-redux'
+import { doLogin } from '~/redux/actions/userAction'
 
 const cx = classNames.bind(styles)
 
@@ -23,7 +24,7 @@ function Auth() {
     const data = await postLogin(email, password)
     if (data && data.EC === 0) {
       toast.success(data.EM)
-      dispatch({ type: 'FETCH_USER_LOGIN_SUCCESS', payload: data })
+      dispatch(doLogin(data))
       navigate(config.routes.home)
     } else {
       toast.error(data.EM)

@@ -5,10 +5,14 @@ import { Logo } from '~/assets/svg'
 import Button from '~/components/Button'
 import { useEffect, useState } from 'react'
 import config from '~/config'
+import { useSelector } from 'react-redux'
 
 const cx = classNames.bind(styles)
 
 function Header() {
+  const user = useSelector((state) => state.user)
+  const { isAuthenticated, account } = user
+
   const [headerBackground, setHeaderBackground] = useState('')
 
   const handleScroll = () => {
@@ -44,12 +48,25 @@ function Header() {
           </Link>
         </div>
         <div className={cx('navbar-actions')}>
-          <Button to={config.routes.login} outline>
-            Log in
-          </Button>
-          <Button to={config.routes.register} primary>
-            Sign up
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Button to={config.routes.profile} outline>
+                {account.username}
+              </Button>
+              <Button to={config.routes.register} primary>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button to={config.routes.login} outline>
+                Log in
+              </Button>
+              <Button to={config.routes.register} primary>
+                Sign up
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>
