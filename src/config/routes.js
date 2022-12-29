@@ -4,7 +4,7 @@ const routes = {
   admin: '/admin',
   login: '/login',
   register: '/register',
-  quiz: '/quiz/:id',
+  quiz: '/quiz/:quizId',
   manageQuiz: '/admin/manage-quiz',
   manageQuestion: '/admin/manage-question',
   manageUser: '/admin/manage-user',

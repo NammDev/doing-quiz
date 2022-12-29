@@ -27,7 +27,7 @@ function Profile() {
     <div className='container'>
       <div className={cx('profile')}>
         {listQuiz.length > 0 ? (
-          <ListQuiz listQuiz={listQuiz} access={account.access_token} />
+          <ListQuiz listQuiz={listQuiz} />
         ) : (
           <h3>You don't have any quiz now...</h3>
         )}
