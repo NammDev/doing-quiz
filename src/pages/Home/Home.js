@@ -1,11 +1,14 @@
 import styles from './Home.module.scss'
 import classNames from 'classnames/bind'
+import { useSelector } from 'react-redux'
 import videoHome from '~/assets/videos/homepage.mp4'
 import Button from '~/components/Button'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
 function Home() {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
   return (
     <>
       <div className={cx('home')}>
@@ -18,7 +21,15 @@ function Home() {
                 typeform instead—and make everyone happy.
               </p>
               <div className={cx('containerText-button')}>
-                <Button className={cx('btn')}>Get started - it's free</Button>
+                {isAuthenticated ? (
+                  <Button to={config.routes.profile} primary className={cx('btn')}>
+                    Doing Quiz Now
+                  </Button>
+                ) : (
+                  <Button to={config.routes.login} primary className={cx('btn')}>
+                    Get started - it's free
+                  </Button>
+                )}
               </div>
               <div className={cx('containerText-list')}>
                 <ul className={cx('required-list')}>
