@@ -20,8 +20,6 @@ function Card({ card, access }) {
     fetchQuestion(listQuestion)
   }
 
-  console.log(listQuestion)
-
   return (
     <li className={cx('card')}>
       <div
@@ -33,7 +31,12 @@ function Card({ card, access }) {
       <div className={cx('card-description')}>
         <h3>Quiz {card.id}</h3>
         <p>{card.description}</p>
-        <ButtonComponent to='#' primary onClick={handleStart} style={{ margin: '0 auto' }}>
+        <ButtonComponent
+          to={`/quiz/${card.id}`}
+          primary
+          onClick={handleStart}
+          style={{ margin: '0 auto' }}
+        >
           Start Now
         </ButtonComponent>
       </div>

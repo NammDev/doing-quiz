@@ -1,4 +1,4 @@
-import { Home, Profile, Admin, Login, Register } from '~/pages'
+import { Home, Profile, Admin, Login, Register, Quiz } from '~/pages'
 import config from '~/config'
 import { HeaderLayout, FragmentLayout, SidebarLayout } from '~/layouts'
 
@@ -9,6 +9,7 @@ const publicRoutes = [
   { path: config.routes.admin, component: Admin, layout: SidebarLayout },
   { path: config.routes.login, component: Login, layout: FragmentLayout },
   { path: config.routes.register, component: Register, layout: FragmentLayout },
+  { path: config.routes.quiz, component: Quiz, layout: FragmentLayout },
 ]
 
 // Need Login
