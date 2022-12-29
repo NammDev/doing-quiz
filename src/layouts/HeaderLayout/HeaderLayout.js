@@ -1,6 +1,6 @@
 import { Header } from '../components'
 
-function MainLayout({ children }) {
+function HeaderLayout({ children }) {
   return (
     <>
       <Header />
@@ -9,4 +9,4 @@ function MainLayout({ children }) {
   )
 }
 
-export default MainLayout
+export default HeaderLayout

@@ -26,7 +26,11 @@ function Profile() {
   return (
     <div className='container'>
       <div className={cx('profile')}>
-        <ListQuiz listQuiz={listQuiz} />
+        {listQuiz.length > 0 ? (
+          <ListQuiz listQuiz={listQuiz} />
+        ) : (
+          <h3>You don't have any quiz now...</h3>
+        )}
       </div>
     </div>
   )

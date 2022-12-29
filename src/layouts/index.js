@@ -1,3 +1,5 @@
-export { default as HeaderLayout } from './HeaderLayout/HeaderLayout'
-export { default as SidebarLayout } from './SidebarLayout/SidebarLayout'
-export { default as FragmentLayout } from './FragmentLayout/FragmentLayout'
+import HeaderLayout from './HeaderLayout/HeaderLayout'
+import SidebarLayout from './SidebarLayout/SidebarLayout'
+import FragmentLayout from './FragmentLayout/FragmentLayout'
+
+export { HeaderLayout, SidebarLayout, FragmentLayout }
