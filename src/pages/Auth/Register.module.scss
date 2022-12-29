@@ -1,0 +1,280 @@
+// Page
+.page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  .register-bg {
+    background-color: rgb(19, 19, 19);
+    flex: 1 1 0%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    width: 100%;
+    padding: 0px;
+    color: inherit;
+  }
+  .register {
+    margin-left: -16px;
+    border-radius: 16px 0px 0px 16px;
+    padding: 0px;
+    flex: 1 1 10%;
+    display: grid;
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    min-height: 90vh;
+    width: 100%;
+    background-color: transparent;
+    color: inherit;
+    .grid {
+      background-color: rgb(255, 255, 255);
+      display: grid;
+      grid-template-columns: [first] 0px [second] auto;
+      grid-template-rows: [first] 52px [second] auto [third] 52px;
+      position: relative;
+      width: 100%;
+    }
+  }
+}
+
+.register-bg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  .register-bg-heading {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    margin: 0px 0px 35px;
+    width: 366px;
+    font-weight: 400;
+    line-height: 44px;
+    text-align: center;
+  }
+  .register-bg-footer {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 20px;
+    position: absolute;
+    bottom: 24px;
+  }
+}
+
+.register {
+  &-top {
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(76, 76, 76);
+    display: flex;
+    grid-column: second / second;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    padding: 8px 24px;
+    .spanLink {
+      font-size: 14px;
+      padding-right: 8px;
+    }
+  }
+  &-content {
+    flex-direction: column;
+    justify-self: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    grid-area: second / second / second / second;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  &-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+}
+
+.small-btn {
+  display: inline-block;
+  width: auto;
+  font-size: 12px;
+  line-height: 14px;
+  height: 28px;
+  padding: 8px 12px 6px;
+  color: rgb(38, 38, 39);
+  background-color: rgb(255, 255, 255);
+  font-family: inherit;
+  text-decoration: none;
+  border-radius: 2px;
+  vertical-align: middle;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease 0s;
+  border: 1px solid currentcolor;
+}
+
+.help-btn {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(38, 38, 39);
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+// Login Component
+.auth {
+  display: block;
+  color: #777;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  position: relative;
+  overflow: auto;
+  height: auto;
+  margin: 0 auto 8px;
+  width: 400px;
+  min-width: 300px;
+  width: 686px;
+  &-content {
+    padding: 20px 72px;
+  }
+}
+
+// Form Custom
+.form-head {
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 36px;
+  color: rgb(115, 115, 115);
+  margin-bottom: 24px;
+  text-align: center;
+  max-width: 100%;
+}
+
+.form-forgot {
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.form-footer {
+  padding-bottom: 25px;
+  margin-top: -1px;
+  &-btn {
+    font-size: 16px;
+    line-height: 28px;
+    height: 40px;
+    padding: 0;
+    transition: all 0.2s ease;
+    border: none;
+    background: #262627;
+    color: #fff;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 15%), inset 0 1px 0 0 hsl(0deg 0% 100% / 10%);
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+    &:hover {
+      opacity: 0.9;
+    }
+    svg {
+      animation: spin 400ms linear infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+      margin-right: 4px;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.group {
+  margin-bottom: 5px;
+  .label {
+    font-weight: 400;
+    color: rgb(38, 38, 39);
+    font-size: 16px;
+    line-height: 24px;
+    width: 100%;
+    padding: 7px 10px 7px 0;
+  }
+  .inputSpan {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    height: 40px;
+    display: inline-block;
+    border-radius: 4px;
+    width: 100%;
+    input {
+      height: 100%;
+      width: 100%;
+      padding: 6px 14px;
+      line-height: 16px;
+      border: none;
+      margin: 0;
+      background: transparent;
+      color: #5e5e5e;
+      font-size: 14px;
+      &:focus {
+        box-shadow: 0 0 8px #51cbee;
+        outline: 0;
+      }
+    }
+    input[type='password'] {
+      &:focus {
+        box-shadow: 0 0 4px #51cbee;
+      }
+    }
+  }
+}
+
+.form-content {
+  max-width: 256px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+// Register
+.form-checkbox {
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 16px;
+  padding-left: 30px;
+  position: relative;
+  cursor: pointer;
+  input[type='checkbox'] {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 18px;
+    height: 18px;
+    margin: 0px;
+    box-shadow: rgb(211 211 211) 0px 0px 0px 1px inset;
+    border-radius: 3px;
+    transition: background-color 0.15s ease 0s;
+  }
+}
+
+.show-password {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  padding: 6px 8px;
+  cursor: pointer;
+  opacity: 1;
+  top: 3px;
+  right: 0;
+  opacity: 0.8;
+}
