@@ -8,6 +8,7 @@ const routes = {
   manageQuiz: '/admin/manage-quiz',
   manageQuestion: '/admin/manage-question',
   manageUser: '/admin/manage-user',
+  notFound: '*',
 }
 
 export default routes
