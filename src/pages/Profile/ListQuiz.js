@@ -4,10 +4,10 @@ import Card from '~/components/Card/Card'
 
 const cx = classNames.bind(styles)
 
-function ListQuiz({ listQuiz }) {
+function ListQuiz({ listQuiz, access }) {
   return (
     <ul className={cx('card-list')}>
-      {listQuiz && listQuiz.map((quiz) => <Card key={quiz.id} card={quiz} />)}
+      {listQuiz && listQuiz.map((quiz) => <Card key={quiz.id} card={quiz} access={access} />)}
     </ul>
   )
 }

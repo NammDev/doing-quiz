@@ -23,7 +23,10 @@
 }
 
 .card-description {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1em 0.5em;
   color: #515151;
   text-decoration: none;
