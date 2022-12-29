@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { getQuestionByQuiz } from '~/services/question'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import _ from 'lodash'
 
 const cx = classNames.bind(styles)
 
@@ -16,7 +17,16 @@ function Quiz() {
   const fetchQuestion = async () => {
     const data = await getQuestionByQuiz(quizId, token)
     if (data && data.EC === 0) {
-      setListQuestion(data.DT)
+      const listQuiz = _.chain(data.DT)
+        .groupBy('id')
+        .map((value, key) => ({
+          answers: value.map((answer) => answer.answers),
+          description: value[0].description,
+          id: key,
+          image: value[0].image,
+        }))
+        .value()
+      setListQuestion(listQuiz)
     }
   }
 
