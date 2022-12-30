@@ -7,7 +7,15 @@ const cx = classNames.bind(styles)
 function ListQuiz({ listQuiz }) {
   return (
     <ul className={cx('card-list')}>
-      {listQuiz && listQuiz.map((quiz) => <Card key={quiz.id} card={quiz} />)}
+      {listQuiz &&
+        listQuiz.map((quiz) => (
+          <Card
+            key={quiz.id}
+            card={quiz}
+            to={`/quiz/${quiz.id}`}
+            state={{ quizTitle: quiz.description }}
+          />
+        ))}
     </ul>
   )
 }

@@ -3,13 +3,15 @@ import classNames from 'classnames/bind'
 import { useState, useEffect } from 'react'
 import { getQuestionByQuiz } from '~/services/question'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import _ from 'lodash'
 import { IoMdStopwatch } from 'react-icons/io'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
 function Quiz() {
+  const { state } = useLocation()
   let { quizId } = useParams()
   const token = useSelector((state) => state.user.account.access_token)
 
@@ -39,7 +41,10 @@ function Quiz() {
     <div className={cx('quiz-page')}>
       <div className='container'>
         <div className={cx('header')}>
-          <p>Trang chủ / Người Dùng / Quiz 15: Test Nhanh Về JAV</p>
+          <p>
+            <Link to={config.routes.home}>Typeform / </Link>
+            <Link to={config.routes.profile}>User / </Link>Quiz: {state?.quizTitle}
+          </p>
         </div>
         <div className={cx('quiz-container')}>
           <div className={cx('quiz')}>
@@ -81,13 +86,13 @@ function Quiz() {
                 <span>04:58</span>
               </div>
               <div className={cx('question-list')}>
-                <div className={cx('question-choose', 'active')}>1</div>
-                <div className={cx('question-choose')}>2</div>
-                <div className={cx('question-choose')}>3</div>
-                <div className={cx('question-choose')}>4</div>
-                <div className={cx('question-choose')}>5</div>
-                <div className={cx('question-choose')}>6</div>
-                <div className={cx('question-choose')}>7</div>
+                {listQuestion &&
+                  listQuestion.map((q, i) => (
+                    <div key={i} className={cx('question-choose')}>
+                      {i + 1}
+                    </div>
+                  ))}
+                <div className={cx('question-choose', 'active')}>4</div>
               </div>
             </div>
             <button className={cx('btn', 'question-btn')}>Submit Exam</button>

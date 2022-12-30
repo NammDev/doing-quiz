@@ -4,7 +4,7 @@ import ButtonComponent from '../Button/Button'
 
 const cx = classNames.bind(styles)
 
-function Card({ card }) {
+function Card({ card, to, state }) {
   return (
     <li className={cx('card')}>
       <div
@@ -16,7 +16,7 @@ function Card({ card }) {
       <div className={cx('card-description')}>
         <h3>Quiz {card.id}</h3>
         <p>{card.description}</p>
-        <ButtonComponent to={`/quiz/${card.id}`} primary style={{ margin: '0 auto' }}>
+        <ButtonComponent to={to} state={state} primary style={{ margin: '0 auto' }}>
           Start Now
         </ButtonComponent>
       </div>
