@@ -4,7 +4,7 @@ import { IoMdStopwatch } from 'react-icons/io'
 
 const cx = classNames.bind(styles)
 
-function Countdown({ listQuestion }) {
+function Countdown({ listQuestion, currentQuestion, setCurrentQuestion }) {
   return (
     <div className={cx('countdown')}>
       <div className={cx('countdown-container')}>
@@ -15,11 +15,14 @@ function Countdown({ listQuestion }) {
         <div className={cx('countdown-list')}>
           {listQuestion &&
             listQuestion.map((q, i) => (
-              <div key={i} className={cx('countdown-choose')}>
+              <div
+                key={i}
+                className={cx('countdown-choose', currentQuestion === i && 'active')}
+                onClick={() => setCurrentQuestion(i)}
+              >
                 {i + 1}
               </div>
             ))}
-          <div className={cx('countdown-choose', 'active')}>4</div>
         </div>
       </div>
     </div>

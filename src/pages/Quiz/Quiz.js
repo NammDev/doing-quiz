@@ -8,6 +8,7 @@ import _ from 'lodash'
 import config from '~/config'
 import Question from './Question'
 import Countdown from './Countdown'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 
@@ -17,6 +18,7 @@ function Quiz() {
   const token = useSelector((state) => state.user.account.access_token)
 
   const [listQuestion, setListQuestion] = useState([])
+  const [currentQuestion, setCurrentQuestion] = useState(0)
 
   const fetchQuestion = async () => {
     const data = await getQuestionByQuiz(quizId, token)
@@ -36,7 +38,23 @@ function Quiz() {
 
   useEffect(() => {
     fetchQuestion()
-  }, [])
+  }, [quizId])
+
+  const handlePrev = () => {
+    if (currentQuestion === 0) {
+      toast.warn('This is First Question')
+    } else {
+      setCurrentQuestion(currentQuestion - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (currentQuestion === listQuestion.length - 1) {
+      toast.warn('This is Last Question')
+    } else {
+      setCurrentQuestion(currentQuestion + 1)
+    }
+  }
 
   return (
     <div className={cx('quiz-page')}>
@@ -49,14 +67,25 @@ function Quiz() {
         </div>
         <div className={cx('body')}>
           <div className={cx('left')}>
-            <Question />
+            <Question
+              question={listQuestion.length > 0 ? listQuestion[currentQuestion] : {}}
+              id={currentQuestion + 1}
+            />
             <div className={cx('left-footer')}>
-              <button className={cx('btn', 'prev')}>Prev Question</button>
-              <button className={cx('btn', 'next')}>Next Question</button>
+              <button className={cx('btn', 'prev')} onClick={handlePrev}>
+                Prev Question
+              </button>
+              <button className={cx('btn', 'next')} onClick={handleNext}>
+                Next Question
+              </button>
             </div>
           </div>
           <div className={cx('right')}>
-            <Countdown listQuestion={listQuestion} />
+            <Countdown
+              currentQuestion={currentQuestion}
+              setCurrentQuestion={setCurrentQuestion}
+              listQuestion={listQuestion}
+            />
             <button className={cx('btn', 'right-footer')}>Submit Exam</button>
           </div>
         </div>
