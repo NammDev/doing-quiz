@@ -5,6 +5,7 @@ import { getQuestionByQuiz } from '~/services/question'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import _ from 'lodash'
+import { IoMdStopwatch } from 'react-icons/io'
 
 const cx = classNames.bind(styles)
 
@@ -35,8 +36,64 @@ function Quiz() {
   }, [])
 
   return (
-    <div className={cx('quiz')}>
-      <h1>Quiz {quizId}</h1>
+    <div className={cx('quiz-page')}>
+      <div className='container'>
+        <div className={cx('header')}>
+          <p>Trang chủ / Người Dùng / Quiz 15: Test Nhanh Về JAV</p>
+        </div>
+        <div className={cx('quiz-container')}>
+          <div className={cx('quiz')}>
+            <img
+              className={cx('quiz-img')}
+              src='https://www.shutterstock.com/image-photo/example-word-written-on-wooden-260nw-1765482248.jpg'
+            />
+            <div className={cx('quiz-body')}>
+              <div className={cx('quiz-body-question')}>1. JAV là gì?</div>
+              <div className={cx('quiz-body-list')}>
+                <label className={cx('quiz-body-answer', 'active')}>
+                  <input type='radio' />
+                  <span className={cx('checkmark')}>Japan Anti Virus</span>
+                </label>
+                <label className={cx('quiz-body-answer')}>
+                  <input type='radio' />
+                  <span className={cx('checkmark')}>Japan Anti Virus</span>
+                </label>
+                <label className={cx('quiz-body-answer')}>
+                  <input type='radio' />
+                  <span className={cx('checkmark')}>Japan Anti Virus</span>
+                </label>
+                <label className={cx('quiz-body-answer')}>
+                  <input type='radio' />
+                  <span className={cx('checkmark')}>Japan Anti Virus</span>
+                </label>
+              </div>
+            </div>
+
+            <div className={cx('quiz-footer')}>
+              <button className={cx('btn', 'prev')}>Prev Question</button>
+              <button className={cx('btn', 'next')}>Next Question</button>
+            </div>
+          </div>
+          <div className={cx('question')}>
+            <div className={cx('question-container')}>
+              <div className={cx('question-countdown')}>
+                <IoMdStopwatch />
+                <span>04:58</span>
+              </div>
+              <div className={cx('question-list')}>
+                <div className={cx('question-choose', 'active')}>1</div>
+                <div className={cx('question-choose')}>2</div>
+                <div className={cx('question-choose')}>3</div>
+                <div className={cx('question-choose')}>4</div>
+                <div className={cx('question-choose')}>5</div>
+                <div className={cx('question-choose')}>6</div>
+                <div className={cx('question-choose')}>7</div>
+              </div>
+            </div>
+            <button className={cx('btn', 'question-btn')}>Submit Exam</button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
