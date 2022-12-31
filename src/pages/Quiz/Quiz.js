@@ -3,7 +3,6 @@ import classNames from 'classnames/bind'
 import { useState, useEffect } from 'react'
 import { getQuestionByQuiz } from '~/services/question'
 import { postSubmitAnswer } from '~/services/answer'
-import { useSelector } from 'react-redux'
 import { useParams, useLocation, Link } from 'react-router-dom'
 import _ from 'lodash'
 import config from '~/config'
@@ -11,6 +10,7 @@ import Question from './Question'
 import Countdown from './Countdown'
 import { toast } from 'react-toastify'
 import ButtonComponent from '~/components/Button/Button'
+import ModalAnswer from './ModalAnswer'
 
 const cx = classNames.bind(styles)
 
@@ -22,6 +22,8 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [disablePrev, setDisablePrev] = useState(false)
   const [disableNext, setDisableNext] = useState(false)
+  const [isShowModal, SetIsShowModal] = useState(false)
+  const [dataModal, setDataModal] = useState({})
 
   const fetchQuestion = async () => {
     const data = await getQuestionByQuiz(quizId)
@@ -40,9 +42,14 @@ function Quiz() {
   }
 
   const submitQuestion = async (payload) => {
-    const data = await postSubmitAnswer(payload)
-    if (data && data.EC === 0) {
-      console.log(data)
+    const res = await postSubmitAnswer(payload)
+    if (res && res.EC === 0) {
+      setDataModal({
+        countCorrect: res.DT.countCorrect,
+        countTotal: res.DT.countTotal,
+        quizData: res.DT.quizData,
+      })
+      SetIsShowModal(true)
     }
   }
 
@@ -100,12 +107,10 @@ function Quiz() {
         return listAnswer
       }, []),
     }))
-
     let payload = {
       quizId: parseInt(quizId),
       answers,
     }
-
     submitQuestion(payload)
   }
 
@@ -154,6 +159,7 @@ function Quiz() {
           </div>
         </div>
       </div>
+      <ModalAnswer show={isShowModal} setShow={SetIsShowModal} data={dataModal} />
     </div>
   )
 }
