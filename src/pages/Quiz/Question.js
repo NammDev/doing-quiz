@@ -1,15 +1,17 @@
 import styles from './Question.module.scss'
 import classNames from 'classnames/bind'
+import images from '~/assets/images'
+
 const cx = classNames.bind(styles)
 
 function Question({ question, id }) {
   return (
     <div className={cx('question')}>
-      {question?.image ? (
-        <img className={cx('question-img')} src={`data:image/jpeg;base64,${question.image}`} />
-      ) : (
-        <></>
-      )}
+      <img
+        className={cx('question-img')}
+        src={question?.image ? `data:image/jpeg;base64,${question.image}` : images.typeForm}
+      />
+
       <div className={cx('question-body')}>
         <div className={cx('question-body-question')}>
           {id}. {question.description}
