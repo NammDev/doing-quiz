@@ -9,6 +9,7 @@ import config from '~/config'
 import Question from './Question'
 import Countdown from './Countdown'
 import { toast } from 'react-toastify'
+import ButtonComponent from '~/components/Button/Button'
 
 const cx = classNames.bind(styles)
 
@@ -19,6 +20,8 @@ function Quiz() {
 
   const [listQuestion, setListQuestion] = useState([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [disablePrev, setDisablePrev] = useState(false)
+  const [disableNext, setDisableNext] = useState(false)
 
   const fetchQuestion = async () => {
     const data = await getQuestionByQuiz(quizId, token)
@@ -39,6 +42,17 @@ function Quiz() {
   useEffect(() => {
     fetchQuestion()
   }, [quizId])
+
+  useEffect(() => {
+    if (currentQuestion === 0) {
+      setDisablePrev(true)
+    } else if (currentQuestion === listQuestion.length - 1) {
+      setDisableNext(true)
+    } else {
+      setDisableNext(false)
+      setDisablePrev(false)
+    }
+  }, [currentQuestion])
 
   const handlePrev = () => {
     if (currentQuestion === 0) {
@@ -72,12 +86,20 @@ function Quiz() {
               id={currentQuestion + 1}
             />
             <div className={cx('left-footer')}>
-              <button className={cx('btn', 'prev')} onClick={handlePrev}>
+              <ButtonComponent
+                disabled={disablePrev}
+                className={cx('btn', 'prev')}
+                onClick={handlePrev}
+              >
                 Prev Question
-              </button>
-              <button className={cx('btn', 'next')} onClick={handleNext}>
+              </ButtonComponent>
+              <ButtonComponent
+                disabled={disableNext}
+                className={cx('btn', 'next')}
+                onClick={handleNext}
+              >
                 Next Question
-              </button>
+              </ButtonComponent>
             </div>
           </div>
           <div className={cx('right')}>

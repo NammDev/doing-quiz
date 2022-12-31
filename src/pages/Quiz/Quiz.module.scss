@@ -68,19 +68,18 @@
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
-  .prev {
-    background-color: #214466;
-    &:hover {
-      background-color: #107eeb;
-      transform: translate(-16px, 7rem);
-    }
-  }
+  .prev,
   .next {
     background-color: #107eeb;
     &:hover {
       background-color: #214466;
-      transform: translate(16px, 7rem);
     }
+  }
+  .prev:hover {
+    transform: translate(-16px, 7rem);
+  }
+  .next:hover {
+    transform: translate(16px, 7rem);
   }
 }
 

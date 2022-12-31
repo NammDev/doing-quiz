@@ -5,7 +5,11 @@ const cx = classNames.bind(styles)
 function Question({ question, id }) {
   return (
     <div className={cx('question')}>
-      <img className={cx('question-img')} src={`data:image/jpeg;base64,${question.image}`} />
+      {question?.image ? (
+        <img className={cx('question-img')} src={`data:image/jpeg;base64,${question.image}`} />
+      ) : (
+        <></>
+      )}
       <div className={cx('question-body')}>
         <div className={cx('question-body-question')}>
           {id}. {question.description}
