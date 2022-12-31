@@ -92,7 +92,7 @@ function Quiz() {
 
   const handleSubmit = () => {
     let answers = listQuestion.map((question) => ({
-      questionId: question.id,
+      questionId: parseInt(question.id),
       userAnswerId: question.answers.reduce((listAnswer, answer) => {
         if (answer.isSelected) {
           listAnswer.push(answer.id)
@@ -100,8 +100,9 @@ function Quiz() {
         return listAnswer
       }, []),
     }))
+
     let payload = {
-      quizId,
+      quizId: parseInt(quizId),
       answers,
     }
 
