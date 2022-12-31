@@ -5,11 +5,9 @@ import images from '~/assets/images'
 
 const cx = classNames.bind(styles)
 
-function Question({ question, id }) {
-  const [radio, setRadio] = useState(0)
-
-  const handleOnClick = (e) => {
-    setRadio(e.target.value)
+function Question({ question, id, handleClickRadio }) {
+  const handleOnClick = (e, answerSelected) => {
+    handleClickRadio(answerSelected)
   }
 
   return (
@@ -27,16 +25,13 @@ function Question({ question, id }) {
           {question?.answers?.map((answer) => (
             <label
               key={answer.id}
-              className={cx(
-                'question-body-answer',
-                parseInt(radio) === parseInt(answer.id, 10) && 'active'
-              )}
+              className={cx('question-body-answer', answer.isSelected && 'active')}
             >
               <input
-                type='radio'
+                type='checkbox'
                 value={answer.id}
-                checked={parseInt(radio) === parseInt(answer.id, 10)}
-                onChange={(e) => handleOnClick(e)}
+                checked={answer.isSelected}
+                onChange={(e) => handleOnClick(e, answer.id)}
               />
               <span className={cx('checkmark')}>{answer.description}</span>
             </label>

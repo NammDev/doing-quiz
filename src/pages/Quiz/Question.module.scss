@@ -55,6 +55,7 @@
       left: 24px;
       transform: translateY(-50%);
       z-index: 1;
+      cursor: pointer;
       display: none;
     }
 
@@ -72,7 +73,7 @@
       cursor: pointer;
     }
 
-    input[type='radio'] {
+    input[type='checkbox'] {
       display: none;
     }
     .checkmark {

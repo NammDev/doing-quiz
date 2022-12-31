@@ -13,7 +13,7 @@ function Profile() {
   const [listQuiz, setListQuiz] = useState([])
 
   const fetchApi = async () => {
-    const data = await getQuizByAccess(account.access_token)
+    const data = await getQuizByAccess()
     if (data && data.EC === 0) {
       setListQuiz(data.DT)
     }

@@ -2,6 +2,7 @@ import styles from './Quiz.module.scss'
 import classNames from 'classnames/bind'
 import { useState, useEffect } from 'react'
 import { getQuestionByQuiz } from '~/services/question'
+import { postSubmitAnswer } from '~/services/answer'
 import { useSelector } from 'react-redux'
 import { useParams, useLocation, Link } from 'react-router-dom'
 import _ from 'lodash'
@@ -16,7 +17,6 @@ const cx = classNames.bind(styles)
 function Quiz() {
   const { state } = useLocation()
   let { quizId } = useParams()
-  const token = useSelector((state) => state.user.account.access_token)
 
   const [listQuestion, setListQuestion] = useState([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -24,18 +24,25 @@ function Quiz() {
   const [disableNext, setDisableNext] = useState(false)
 
   const fetchQuestion = async () => {
-    const data = await getQuestionByQuiz(quizId, token)
+    const data = await getQuestionByQuiz(quizId)
     if (data && data.EC === 0) {
       const listQuiz = _.chain(data.DT)
         .groupBy('id')
         .map((value, key) => ({
-          answers: value.map((answer) => answer.answers),
+          answers: value.map((quiz) => ({ ...quiz.answers, isSelected: false })),
           description: value[0].description,
           id: key,
           image: value[0].image,
         }))
         .value()
       setListQuestion(listQuiz)
+    }
+  }
+
+  const submitQuestion = async (payload) => {
+    const data = await postSubmitAnswer(payload)
+    if (data && data.EC === 0) {
+      console.log(data)
     }
   }
 
@@ -54,6 +61,19 @@ function Quiz() {
     }
   }, [currentQuestion])
 
+  const handleClickRadio = (answerSelected) => {
+    let listQuestionClone = _.cloneDeep(listQuestion)
+    listQuestionClone.forEach((question) => {
+      question.answers.forEach((answer) => {
+        if (answer.id === answerSelected) {
+          answer.isSelected = !answer.isSelected
+          return
+        }
+      })
+    })
+    setListQuestion(listQuestionClone)
+  }
+
   const handlePrev = () => {
     if (currentQuestion === 0) {
       toast.warn('This is First Question')
@@ -70,6 +90,24 @@ function Quiz() {
     }
   }
 
+  const handleSubmit = () => {
+    let answers = listQuestion.map((question) => ({
+      questionId: question.id,
+      userAnswerId: question.answers.reduce((listAnswer, answer) => {
+        if (answer.isSelected) {
+          listAnswer.push(answer.id)
+        }
+        return listAnswer
+      }, []),
+    }))
+    let payload = {
+      quizId,
+      answers,
+    }
+
+    submitQuestion(payload)
+  }
+
   return (
     <div className={cx('quiz-page')}>
       <div className='container'>
@@ -84,6 +122,7 @@ function Quiz() {
             <Question
               question={listQuestion.length > 0 ? listQuestion[currentQuestion] : {}}
               id={currentQuestion + 1}
+              handleClickRadio={handleClickRadio}
             />
             <div className={cx('left-footer')}>
               <ButtonComponent
@@ -108,7 +147,9 @@ function Quiz() {
               setCurrentQuestion={setCurrentQuestion}
               listQuestion={listQuestion}
             />
-            <button className={cx('btn', 'right-footer')}>Submit Exam</button>
+            <ButtonComponent className={cx('btn', 'right-footer')} onClick={handleSubmit}>
+              Submit Exam
+            </ButtonComponent>
           </div>
         </div>
       </div>
