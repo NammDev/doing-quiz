@@ -1,40 +1,5 @@
 @import 'src/components/GlobalStyles/_variables.scss';
 
-.manage-user {
-  padding: 24px 48px;
-  margin: 48px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px 1px rgb(0 0 0 / 6%), 0 1px 4px rgb(0 0 0 / 8%);
-  border: 0;
-  background-color: white;
-}
-
-.form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  .form-group-full {
-    flex-basis: 100%;
-    padding: 8px 0;
-  }
-  .form-group-half {
-    flex-basis: 45%;
-    padding: 8px 0;
-  }
-}
-
-.container-img {
-  margin-top: 12px;
-  .img {
-    overflow: hidden;
-    width: 100%;
-    border-radius: 12px;
-  }
-}
-
-// Table
-
 .content-table {
   border-collapse: collapse;
   margin: 25px 0;

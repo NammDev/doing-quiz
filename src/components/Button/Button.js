@@ -13,6 +13,7 @@ function ButtonComponent({
   underline,
   disabled,
   className,
+  classOriginal,
   left,
   right,
   children,
@@ -43,6 +44,7 @@ function ButtonComponent({
     underline,
     disabled,
     [className]: className,
+    [classOriginal]: classOriginal,
   })
 
   return (

@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  .form-group-half {
+    flex-basis: 45%;
+    padding: 8px 0;
+  }
+}
+
+.btn {
+  margin-top: 12px;
+}
