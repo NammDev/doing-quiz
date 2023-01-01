@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
 import { Logo } from '~/assets/svg'
 import Button from '~/components/Button'
-import { useEffect, useState } from 'react'
 import config from '~/config'
 import { useSelector } from 'react-redux'
 
@@ -13,23 +12,8 @@ function Header() {
   const user = useSelector((state) => state.user)
   const { isAuthenticated, account } = user
 
-  const [headerBackground, setHeaderBackground] = useState('')
-
-  const handleScroll = () => {
-    if (window.scrollY > 88) {
-      return setHeaderBackground('header-bg-white')
-    } else {
-      return setHeaderBackground('')
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
-    <div className={cx('header', headerBackground)}>
+    <div className={cx('header')}>
       <div className={cx('navbar')} expand='lg'>
         <div className={cx('navbar-logo')}>
           <Link className={cx('logo')} to='/'>
