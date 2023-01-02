@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import ButtonComponent from '~/components/Button/Button'
 import { toast } from 'react-toastify'
+import { postQuiz } from '~/services/quiz'
 
 const cx = classNames.bind(styles)
 const options = [
@@ -27,15 +28,15 @@ function CreateQuiz() {
 
   const postApi = async () => {
     console.log(description, quizName, type?.value, image)
-    // const data = await createUser(description, quizName, type?.value, image)
-    // if (data && data.EC === 0) {
-    //   toast.success(data.EM)
-    //   setQuizName('')
-    //   setDescription('')
-    //   setImage(null)
-    // } else {
-    //   toast.error(data.EM)
-    // }
+    const data = await postQuiz(description, quizName, type?.value, image)
+    if (data && data.EC === 0) {
+      toast.success(data.EM)
+      setQuizName('')
+      setDescription('')
+      setImage(null)
+    } else {
+      toast.error(data.EM)
+    }
   }
 
   const handleSubmitQuiz = () => {
