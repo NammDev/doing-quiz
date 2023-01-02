@@ -1,12 +1,15 @@
 @import 'src/components/GlobalStyles/_variables.scss';
 
 .manage-user {
-  padding: 24px 48px;
-  margin: 48px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px 1px rgb(0 0 0 / 6%), 0 1px 4px rgb(0 0 0 / 8%);
-  border: 0;
-  background-color: white;
+  padding-top: 48px;
+  .table-user {
+    padding: 24px 48px;
+    margin: 0 48px 0 48px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px 1px rgb(0 0 0 / 6%), 0 1px 4px rgb(0 0 0 / 8%);
+    border: 0;
+    background-color: white;
+  }
 }
 
 .form {

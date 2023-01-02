@@ -65,39 +65,41 @@ function ManageUser() {
 
   return (
     <div className={cx('manage-user')}>
-      <h2>ManagerUser</h2>
-      <ButtonComponent
-        onClick={() => setShowModalCreate(true)}
-        className='btn-color'
-        left={<RiAddFill />}
-      >
-        Create User
-      </ButtonComponent>
-      <ModalCreateUser
-        show={showModalCreate}
-        setShow={setShowModalCreate}
-        reRender={handleReRender}
-      />
-      <ModalUpdateUser
-        show={showModalUpdate}
-        setShow={setShowModalUpdate}
-        reRender={handleReRenderUpdate}
-        data={dataUpdate}
-      />
-      <ModalDeleteUser
-        show={showModalDelete}
-        setShow={setShowModalDelete}
-        data={dataDelete}
-        reRender={handleReRender}
-      />
-      <TableUser
-        listUsers={listUsersPage}
-        onUpdate={handleClickUpdate}
-        onDelete={handleClickDelete}
-        pageCount={pageCount}
-        handlePageClick={handlePageClick}
-        currentPage={currentPage}
-      />
+      <div className={cx('table-user')}>
+        <h2>Table User</h2>
+        <ButtonComponent
+          onClick={() => setShowModalCreate(true)}
+          className='btn-color'
+          left={<RiAddFill />}
+        >
+          Create User
+        </ButtonComponent>
+        <ModalCreateUser
+          show={showModalCreate}
+          setShow={setShowModalCreate}
+          reRender={handleReRender}
+        />
+        <ModalUpdateUser
+          show={showModalUpdate}
+          setShow={setShowModalUpdate}
+          reRender={handleReRenderUpdate}
+          data={dataUpdate}
+        />
+        <ModalDeleteUser
+          show={showModalDelete}
+          setShow={setShowModalDelete}
+          data={dataDelete}
+          reRender={handleReRender}
+        />
+        <TableUser
+          listUsers={listUsersPage}
+          onUpdate={handleClickUpdate}
+          onDelete={handleClickDelete}
+          pageCount={pageCount}
+          handlePageClick={handlePageClick}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   )
 }

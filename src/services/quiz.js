@@ -5,7 +5,7 @@ export const getQuizByAccess = async () => {
   return res
 }
 
-export const getQuizAll = async () => {
+export const getAllQuizForAdmin = async () => {
   const res = await axios.get(`/quiz/all`)
   return res
 }

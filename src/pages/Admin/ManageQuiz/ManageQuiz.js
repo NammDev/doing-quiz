@@ -7,14 +7,14 @@ const cx = classNames.bind(styles)
 
 function ManageQuiz() {
   return (
-    <>
+    <div className={cx('manage-quiz')}>
       <div className={cx('component')}>
         <CreateQuiz />
       </div>
       <div className={cx('component')}>
         <TableQuiz />
       </div>
-    </>
+    </div>
   )
 }
 

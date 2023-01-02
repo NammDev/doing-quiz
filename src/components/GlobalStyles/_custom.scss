@@ -52,3 +52,18 @@
   -ms-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);
 }
+
+// Admin -> Manage Quiz -> Create Quiz -> Accordition Create Quiz
+.custom-acc {
+  .accordion-button {
+    &:not(.collapsed) {
+      color: inherit;
+      background-color: unset;
+    }
+    &:focus {
+      border-color: unset;
+      outline: 0;
+      box-shadow: unset;
+    }
+  }
+}

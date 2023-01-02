@@ -3,7 +3,7 @@ import { BsPencilFill } from 'react-icons/bs'
 import { TiDelete } from 'react-icons/ti'
 import styles from './TableQuiz.module.scss'
 import { useState, useEffect } from 'react'
-import { getQuizAll } from '~/services/quiz'
+import { getAllQuizForAdmin } from '~/services/quiz'
 
 const cx = classNames.bind(styles)
 
@@ -11,7 +11,7 @@ function TableQuiz() {
   const [listQuiz, setListQuiz] = useState([])
 
   const fetchAPI = async () => {
-    const data = await getQuizAll()
+    const data = await getAllQuizForAdmin()
     if (data.EC === 0) {
       setListQuiz(data.DT)
     }
