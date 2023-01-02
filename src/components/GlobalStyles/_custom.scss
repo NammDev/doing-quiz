@@ -56,9 +56,11 @@
 // Admin -> Manage Quiz -> Create Quiz -> Accordition Create Quiz
 .custom-acc {
   .accordion-button {
+    // background-color: #f0ebf8;
     &:not(.collapsed) {
       color: inherit;
       background-color: unset;
+      box-shadow: none;
     }
     &:focus {
       border-color: unset;
