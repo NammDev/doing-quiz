@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind'
 import styles from './QuestionAnswer.module.scss'
 import { Form } from 'react-bootstrap'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { RiAddCircleLine, RiDeleteBin6Line, RiImage2Line } from 'react-icons/ri'
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi'
 
 const cx = classNames.bind(styles)
 
-function QuestionAnswer({ onSubmit, data }) {
+function QuestionAnswer({ onClickQuestion, data, onClickAnswer }) {
   const [previewImage, setPreviewImage] = useState('')
   const [image, setImage] = useState('')
 
@@ -24,7 +24,7 @@ function QuestionAnswer({ onSubmit, data }) {
     <div className={cx('wrapper')}>
       <Form>
         <div className={cx('question')}>
-          <Form.Control type='text' placeholder='Add New Quiz ...' />
+          <Form.Control type='text' placeholder='Add New Question' />
           <label>
             <input
               type='file'
@@ -40,25 +40,37 @@ function QuestionAnswer({ onSubmit, data }) {
           {previewImage ? <img alt='preview_avatar' src={previewImage} /> : <></>}
         </div>
 
-        <div className={cx('answer')}>
-          <Form.Check type='checkbox' />
-          <Form.Control type='text' placeholder='Answer 1' />
-          <div className={cx('answer-action')}>
-            <RiAddCircleLine style={{ color: 'green' }} />
-            <RiDeleteBin6Line style={{ color: 'red' }} />
-          </div>
-        </div>
+        {data.answers &&
+          data.answers.map((a) => (
+            <div key={a.id} className={cx('answer')}>
+              <Form.Check type='checkbox' />
+              <Form.Control type='text' placeholder='Answer 1' />
+              <div className={cx('answer-action')}>
+                <RiAddCircleLine
+                  style={{ color: 'green' }}
+                  onClick={() => onClickAnswer('ADD', data.id)}
+                />
+                <RiDeleteBin6Line
+                  style={{ color: 'red' }}
+                  onClick={() => onClickAnswer('REMOVE', data.id, a.id)}
+                />
+              </div>
+            </div>
+          ))}
       </Form>
       <hr />
       <div className={cx('action')}>
-        <RiDeleteBin6Line style={{ color: 'red' }} onClick={() => onSubmit('REMOVE', data.id)} />
+        <RiDeleteBin6Line
+          style={{ color: 'red' }}
+          onClick={() => onClickQuestion('REMOVE', data.id)}
+        />
         <div>
-          <HiOutlineDocumentDuplicate onClick={() => onSubmit('COPY', data.id)} />
-          <RiAddCircleLine style={{ color: 'green' }} onClick={() => onSubmit('ADD', data.id)} />
+          <HiOutlineDocumentDuplicate onClick={() => onClickQuestion('COPY', data.id)} />
+          <RiAddCircleLine style={{ color: 'green' }} onClick={() => onClickQuestion('ADD')} />
         </div>
       </div>
     </div>
   )
 }
 
-export default QuestionAnswer
+export default memo(QuestionAnswer)
