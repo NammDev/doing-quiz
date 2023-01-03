@@ -29,3 +29,8 @@ export const postAssignQuizForUser = async (quizId, userId) => {
   const res = await axios.post(`/quiz-assign-to-user`, { quizId, userId })
   return res
 }
+
+export const postUpsertQA = async (data) => {
+  const res = await axios.post(`/quiz-upsert-qa`, { ...data })
+  return res
+}

@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
 import ButtonComponent from '~/components/Button/Button'
 import { RiAddFill } from 'react-icons/ri'
-import { getAllQuizForAdmin, getQuizWithQA } from '~/services/quiz'
-import { postCreateQuestionForQuiz, postCreateAnswerforQuestion } from '~/services/question'
+import { getAllQuizForAdmin, getQuizWithQA, postUpsertQA } from '~/services/quiz'
 import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
@@ -33,32 +32,21 @@ function UpdateQuestion() {
     }
   }
 
-  const urltoFile = async (url, filename, mimeType) => {
-    return fetch(url)
-      .then(function (res) {
-        return res.arrayBuffer()
+  const toBase64 = (file) => {
+    if (typeof file === 'string') {
+      return `data:image/jpeg;base64,${file}`
+    } else {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = (error) => reject(error)
       })
-      .then(function (buf) {
-        return new File([buf], filename, { type: mimeType })
-      })
+    }
   }
-
   const fetchQuestionAnswerApi = async (quizId) => {
     const data = await getQuizWithQA(quizId)
     if (data && data.EC === 0) {
-      // let newQA = []
-      // for (let i = 0; i < data.DT.qa.length; i++) {
-      //   let q = data.DT.qa[i]
-      //   if (q.imageFile) {
-      //     q.imageName = `Question-${q.id}.png`
-      //     q.imageFile = await urltoFile(
-      //       `data:image/png;base64,${q.imageFile}`,
-      //       `Question-${q.id}.png`,
-      //       'image/png'
-      //     )
-      //   }
-      //   newQA.push(q)
-      // }
       setQuestions(data.DT.qa)
     }
   }
@@ -70,22 +58,27 @@ function UpdateQuestion() {
   }, [selectedQuiz])
 
   const postApi = async () => {
-    // Submit API
-    // for (const q of questions) {
-    //   const resQuestion = await postCreateQuestionForQuiz(
-    //     +selectedQuiz.value,
-    //     q.description,
-    //     q.imageFile
-    //   )
-    //   for (const a of q.answers) {
-    //     await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
-    //   }
-    // }
-    // Reset Data
-    setQuestions([])
-    toast.success(`Success Update Questions & Answer for Quiz ${selectedQuiz.value}`)
-    setSelectedQuiz('')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Upsert API
+    let questionsClone = _.cloneDeep(questions)
+    for (let i = 0; i < questionsClone.length; i++) {
+      const q = questionsClone[i]
+      if (q.imageFile) {
+        q.imageFile = await toBase64(q.imageFile)
+      }
+    }
+    let res = await postUpsertQA({
+      quizId: selectedQuiz.value,
+      questions: questionsClone,
+    })
+    if (res && res.EC === 0) {
+      // Reset Data
+      toast.success(res.EM)
+      setQuestions([])
+      setSelectedQuiz('')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      toast.error(res.EM)
+    }
   }
 
   useEffect(() => {

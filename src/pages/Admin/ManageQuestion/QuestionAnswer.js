@@ -14,7 +14,7 @@ function QuestionAnswer({ onClickQuestion, data, onClickAnswer, onChange }) {
     if (data.imageFile) {
       setPreviewImage(`data:image/jpeg;base64,${data.imageFile}`)
     }
-  }, [data])
+  }, [])
 
   const handleUpload = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
