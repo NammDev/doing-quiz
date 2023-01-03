@@ -34,6 +34,26 @@ function AddQuestion() {
     }
   }
 
+  const postApi = async () => {
+    // Submit API
+    for (const q of questions) {
+      const resQuestion = await postCreateQuestionForQuiz(
+        +selectedQuiz.value,
+        q.description,
+        q.imageFile
+      )
+      for (const a of q.answers) {
+        await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
+      }
+    }
+    // Reset Data
+    const newQuestion = { ...NEW_QUESTION, id: uuidv4() }
+    setQuestions([newQuestion])
+    toast.success(`Success Add Questions & Answer for ${selectedQuiz.value}`)
+    setSelectedQuiz('')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   useEffect(() => {
     fetchApi()
   }, [])
@@ -109,69 +129,99 @@ function AddQuestion() {
     }
   }
 
-  const handleSubmit = async () => {
-    // await Promise.all(
-    //   questions.map(async (q) => {
-    //     const resQuestion = await postCreateQuestionForQuiz(
-    //       +selectedQuiz.value,
-    //       q.description,
-    //       q.imageFile
-    //     )
-    //     await Promise.all(
-    //       q.answers.map(async (a) => {
-    //         await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
-    //       })
-    //     )
-    //   })
-    // )
-    for (const q of questions) {
-      const resQuestion = await postCreateQuestionForQuiz(
-        +selectedQuiz.value,
-        q.description,
-        q.imageFile
-      )
-      for (const a of q.answers) {
-        await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
+  const validate = () => {
+    let isValidQuiz = true,
+      isValidQuestion = true,
+      isValidAnswer = true,
+      isValidCheckbox = true
+    let indexQ = 0,
+      indexA = 0
+    // Validate Quiz
+    if (_.isEmpty(selectedQuiz)) {
+      isValidQuiz = false
+      toast.error('Please Choose a Quiz!')
+      return
+    }
+    // Validate Question
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        isValidQuestion = false
+        indexQ = i
+        break
       }
     }
-    const newQuestion = { ...NEW_QUESTION, id: uuidv4() }
-    setQuestions([newQuestion])
-    toast.success(`Success Add Questions & Answer for ${selectedQuiz.label}`)
-    setSelectedQuiz('')
+    if (!isValidQuestion) {
+      toast.error(`Please input description for Question ${++indexQ}`)
+      return
+    }
+    // Validate Answer
+    for (let i = 0; i < questions.length; i++) {
+      for (let k = 0; k < questions[i].answers.length; k++) {
+        if (!questions[i].answers[k].description) {
+          isValidAnswer = false
+          indexA = k
+          indexQ = i
+          break
+        }
+      }
+      if (!isValidAnswer) break
+    }
+    if (!isValidAnswer) {
+      toast.error(`Please input description for Answer ${++indexA} at Question ${++indexQ}`)
+      return
+    }
+    // Validate Checkbox
+    for (const [i, q] of questions.entries()) {
+      const count = q.answers.reduce((acc, a) => {
+        if (a.isCorrect === true) {
+          acc = acc + 1
+        }
+        return acc
+      }, 0)
+      if (count === 0) {
+        indexQ = i
+        isValidCheckbox = false
+        break
+      }
+    }
+    if (!isValidCheckbox) {
+      toast.error(`Please choose at least 1 correct answer at Question ${++indexQ}`)
+      return
+    }
+    // validate
+    return isValidQuiz && isValidQuestion && isValidAnswer && isValidCheckbox
+  }
+
+  const handleSubmit = async () => {
+    // Submit Question & Answer -> Call API
+    validate() && postApi()
   }
 
   return (
-    <Accordion className='custom-acc' flush>
-      <Accordion.Header>
-        <h3>Manage Quizzes</h3>
-      </Accordion.Header>
-      <Accordion.Body>
-        <div className={cx('container')}>
-          <div className={cx('select-quiz')}>
-            <h4>Select a Quiz</h4>
-            <Select defaultValue={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} />
-          </div>
-          {questions &&
-            questions.map((q) => (
-              <QuestionAnswer
-                onClickQuestion={handleQuestion}
-                onClickAnswer={handleAnswer}
-                onChange={handleOnChange}
-                data={q}
-                key={q.id}
-              />
-            ))}
-          <ButtonComponent
-            onClick={handleSubmit}
-            classOriginal='btn-color'
-            className={cx('save-btn')}
-            left={<RiAddFill />}
-          >
-            Save New Questions
-          </ButtonComponent>
-        </div>
-      </Accordion.Body>
-    </Accordion>
+    <div className={cx('container')}>
+      <div className={cx('select-quiz')}>
+        <h4>Select a Quiz</h4>
+        <Select defaultValue={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} />
+      </div>
+      {questions &&
+        questions.map((q) => (
+          <QuestionAnswer
+            onClickQuestion={handleQuestion}
+            onClickAnswer={handleAnswer}
+            onChange={handleOnChange}
+            data={q}
+            key={q.id}
+          />
+        ))}
+      <ButtonComponent
+        onClick={handleSubmit}
+        classOriginal='btn-color'
+        className={cx('save-btn')}
+        left={<RiAddFill />}
+      >
+        Save New Questions
+      </ButtonComponent>
+    </div>
   )
 }
 

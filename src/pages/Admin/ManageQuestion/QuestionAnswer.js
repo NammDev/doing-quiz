@@ -9,7 +9,6 @@ const cx = classNames.bind(styles)
 
 function QuestionAnswer({ onClickQuestion, data, onClickAnswer, onChange }) {
   const [previewImage, setPreviewImage] = useState('')
-  const [image, setImage] = useState('')
 
   const handleUpload = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
@@ -92,4 +91,4 @@ function QuestionAnswer({ onClickQuestion, data, onClickAnswer, onChange }) {
   )
 }
 
-export default memo(QuestionAnswer)
+export default QuestionAnswer

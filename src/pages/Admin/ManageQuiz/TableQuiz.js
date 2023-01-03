@@ -30,52 +30,49 @@ function TableQuiz() {
   }
 
   return (
-    <>
-      <h2>Table Quiz</h2>
-      <table className={cx('content-table')}>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Quiz Name</th>
-            <th>Description</th>
-            <th>Level</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listQuiz &&
-            listQuiz.length > 0 &&
-            listQuiz.map((quiz) => (
-              <tr key={quiz.id}>
-                <td>{quiz.id}</td>
-                <td>{quiz.name}</td>
-                <td>{quiz.description}</td>
-                <td>{quiz.difficulty}</td>
-                <td>
-                  <ul className={cx('table-actions')}>
-                    <li>
-                      <BsPencilFill
-                        size={16}
-                        className='hover-big'
-                        style={{ color: 'green' }}
-                        onClick={handleClickUpdate}
-                      />
-                    </li>
-                    <li>
-                      <TiDelete
-                        size={20}
-                        onClick={handleClickDelete}
-                        className='hover-big'
-                        style={{ color: 'red' }}
-                      />
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </>
+    <table className={cx('content-table')}>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Quiz Name</th>
+          <th>Description</th>
+          <th>Level</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {listQuiz &&
+          listQuiz.length > 0 &&
+          listQuiz.map((quiz) => (
+            <tr key={quiz.id}>
+              <td>{quiz.id}</td>
+              <td>{quiz.name}</td>
+              <td>{quiz.description}</td>
+              <td>{quiz.difficulty}</td>
+              <td>
+                <ul className={cx('table-actions')}>
+                  <li>
+                    <BsPencilFill
+                      size={16}
+                      className='hover-big'
+                      style={{ color: 'green' }}
+                      onClick={handleClickUpdate}
+                    />
+                  </li>
+                  <li>
+                    <TiDelete
+                      size={20}
+                      onClick={handleClickDelete}
+                      className='hover-big'
+                      style={{ color: 'red' }}
+                    />
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
   )
 }
 
