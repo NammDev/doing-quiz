@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react'
 import { getAllQuizForAdmin } from '~/services/quiz'
 import { getAllUsers } from '~/services/users'
 import ButtonComponent from '~/components/Button/Button'
+import { postAssignQuizForUser } from '~/services/quiz'
+import { toast } from 'react-toastify'
+import _ from 'lodash'
 
 const cx = classNames.bind(styles)
 
@@ -38,7 +41,23 @@ function AssignUser() {
     fetchUserApi()
   }, [])
 
-  const handleSubmitAssign = () => {}
+  const handleSubmitAssign = async () => {
+    if (_.isEmpty(selectedQuiz)) {
+      toast.error('Please Choose a Quiz to Assign!')
+      return
+    } else if (_.isEmpty(selectedUser)) {
+      toast.error('Please Choose a User to Assign!')
+      return
+    }
+    const res = await postAssignQuizForUser(selectedQuiz.value, selectedUser.value)
+    if (res && res.EC === 0) {
+      toast.success(res.EM)
+      setSelectedQuiz({})
+      setListUser({})
+    } else {
+      toast.error(res.EM)
+    }
+  }
 
   return (
     <div className={cx('assign')}>
