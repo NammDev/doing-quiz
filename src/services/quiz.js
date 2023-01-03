@@ -10,6 +10,11 @@ export const getAllQuizForAdmin = async () => {
   return res
 }
 
+export const getQuizWithQA = async (quizId) => {
+  const res = await axios.get(`/quiz-with-qa/${quizId}`)
+  return res
+}
+
 export const postQuiz = async (description, name, difficulty, quizImage) => {
   const form = new FormData()
   form.append('description', description)

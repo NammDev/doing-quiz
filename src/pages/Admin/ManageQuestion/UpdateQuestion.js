@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
 import ButtonComponent from '~/components/Button/Button'
 import { RiAddFill } from 'react-icons/ri'
-import { getAllQuizForAdmin } from '~/services/quiz'
+import { getAllQuizForAdmin, getQuizWithQA } from '~/services/quiz'
 import { postCreateQuestionForQuiz, postCreateAnswerforQuestion } from '~/services/question'
 import { toast } from 'react-toastify'
 
@@ -22,10 +22,10 @@ const NEW_QUESTION = {
 
 function UpdateQuestion() {
   const [selectedQuiz, setSelectedQuiz] = useState()
-  const [questions, setQuestions] = useState([NEW_QUESTION])
+  const [questions, setQuestions] = useState([])
   const [listQuiz, setListQuiz] = useState([])
 
-  const fetchApi = async () => {
+  const fetchQuizApi = async () => {
     const data = await getAllQuizForAdmin()
     if (data && data.EC === 0) {
       const newListQuiz = data.DT.map((q) => ({ value: q.id, label: `${q.id} - ${q.description}` }))
@@ -33,28 +33,63 @@ function UpdateQuestion() {
     }
   }
 
+  const urltoFile = async (url, filename, mimeType) => {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer()
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType })
+      })
+  }
+
+  const fetchQuestionAnswerApi = async (quizId) => {
+    const data = await getQuizWithQA(quizId)
+    if (data && data.EC === 0) {
+      // let newQA = []
+      // for (let i = 0; i < data.DT.qa.length; i++) {
+      //   let q = data.DT.qa[i]
+      //   if (q.imageFile) {
+      //     q.imageName = `Question-${q.id}.png`
+      //     q.imageFile = await urltoFile(
+      //       `data:image/png;base64,${q.imageFile}`,
+      //       `Question-${q.id}.png`,
+      //       'image/png'
+      //     )
+      //   }
+      //   newQA.push(q)
+      // }
+      setQuestions(data.DT.qa)
+    }
+  }
+
+  useEffect(() => {
+    if (selectedQuiz) {
+      fetchQuestionAnswerApi(selectedQuiz.value)
+    }
+  }, [selectedQuiz])
+
   const postApi = async () => {
     // Submit API
-    for (const q of questions) {
-      const resQuestion = await postCreateQuestionForQuiz(
-        +selectedQuiz.value,
-        q.description,
-        q.imageFile
-      )
-      for (const a of q.answers) {
-        await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
-      }
-    }
+    // for (const q of questions) {
+    //   const resQuestion = await postCreateQuestionForQuiz(
+    //     +selectedQuiz.value,
+    //     q.description,
+    //     q.imageFile
+    //   )
+    //   for (const a of q.answers) {
+    //     await postCreateAnswerforQuestion(resQuestion.DT.id, a.description, a.isCorrect)
+    //   }
+    // }
     // Reset Data
-    const newQuestion = { ...NEW_QUESTION, id: uuidv4() }
-    setQuestions([newQuestion])
-    toast.success(`Success Add Questions & Answer for ${selectedQuiz.value}`)
+    setQuestions([])
+    toast.success(`Success Update Questions & Answer for Quiz ${selectedQuiz.value}`)
     setSelectedQuiz('')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   useEffect(() => {
-    fetchApi()
+    fetchQuizApi()
   }, [])
 
   const handleQuestion = (type, id) => {
@@ -200,9 +235,15 @@ function UpdateQuestion() {
     <div className={cx('container')}>
       <div className={cx('select-quiz')}>
         <h4>Select a Quiz</h4>
-        <Select defaultValue={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} />
+        <Select
+          value={selectedQuiz || ''}
+          defaultValue={selectedQuiz}
+          onChange={setSelectedQuiz}
+          options={listQuiz}
+        />
       </div>
       {questions &&
+        questions.length > 0 &&
         questions.map((q) => (
           <QuestionAnswer
             onClickQuestion={handleQuestion}
@@ -218,7 +259,7 @@ function UpdateQuestion() {
         className={cx('save-btn')}
         left={<RiAddFill />}
       >
-        Save New Questions
+        Update Questions
       </ButtonComponent>
     </div>
   )

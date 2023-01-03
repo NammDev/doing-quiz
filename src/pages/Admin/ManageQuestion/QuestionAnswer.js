@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import styles from './QuestionAnswer.module.scss'
 import { Form } from 'react-bootstrap'
-import { memo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RiAddCircleLine, RiDeleteBin6Line, RiImage2Line } from 'react-icons/ri'
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi'
 
@@ -9,6 +9,12 @@ const cx = classNames.bind(styles)
 
 function QuestionAnswer({ onClickQuestion, data, onClickAnswer, onChange }) {
   const [previewImage, setPreviewImage] = useState('')
+
+  useEffect(() => {
+    if (data.imageFile) {
+      setPreviewImage(`data:image/jpeg;base64,${data.imageFile}`)
+    }
+  }, [data])
 
   const handleUpload = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {

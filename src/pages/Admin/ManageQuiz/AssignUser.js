@@ -30,7 +30,7 @@ function AssignUser() {
     if (res.EC === 0) {
       const newListUser = res.DT.map((u) => ({
         value: u.id,
-        label: `${u.id} - ${u.username} - ${u.email}`,
+        label: `${u.id} - ${u.username}`,
       }))
       setListUser(newListUser)
     }
