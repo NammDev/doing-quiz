@@ -22,7 +22,6 @@ const userReducer = (state = initialState, { type, payload }) => {
       }
     }
     case CLEAR_DATA_USER_LOGOUT_SUCCESS:
-      console.log(CLEAR_DATA_USER_LOGOUT_SUCCESS)
       return {
         ...state,
         isAuthenticated: false,

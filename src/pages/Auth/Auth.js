@@ -32,7 +32,7 @@ function Auth() {
       toast.success(data.EM)
       // Handle Successful Login
       const { redirectTo } = queryString.parse(location.search)
-      navigate(redirectTo)
+      navigate(redirectTo == null ? config.routes.home : redirectTo)
     } else {
       toast.error(data.EM)
     }
@@ -80,6 +80,11 @@ function Auth() {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete='on'
                     placeholder='At least 8 characters?'
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        handleLogin()
+                      }
+                    }}
                   ></input>
                   <span
                     className={cx('show-password')}
