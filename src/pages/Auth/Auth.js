@@ -4,18 +4,20 @@ import ButtonComponent from '~/components/Button'
 import { useState } from 'react'
 import { postLogin } from '~/services/auth'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import config from '~/config'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
 import { useDispatch } from 'react-redux'
 import { doLogin } from '~/redux/actions/userAction'
 import { ImSpinner2 } from 'react-icons/im'
+import queryString from 'query-string'
 
 const cx = classNames.bind(styles)
 
 function Auth() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,7 +30,9 @@ function Auth() {
     if (data && data.EC === 0) {
       dispatch(doLogin(data.DT))
       toast.success(data.EM)
-      navigate(config.routes.home)
+      // Handle Successful Login
+      const { redirectTo } = queryString.parse(location.search)
+      navigate(redirectTo)
     } else {
       toast.error(data.EM)
     }
