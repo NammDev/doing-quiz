@@ -5,56 +5,59 @@ import styles from './App.module.scss'
 import config from '~/config'
 import { ToastContainer } from 'react-toastify'
 import { PrivateRoute } from './routes/PrivateRoute'
+import { Suspense } from 'react'
 
 const cx = classNames.bind(styles)
 
 function App() {
   return (
-    <Router>
-      <div className={cx('app')}>
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            let Layout = route.layout
-            const Page = route.component
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            )
-          })}
-          {privateRoutes.map((route, index) => {
-            let Layout = route.layout
-            const Page = route.component
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <PrivateRoute>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Router>
+        <div className={cx('app')}>
+          <Routes>
+            {publicRoutes.map((route, index) => {
+              let Layout = route.layout
+              const Page = route.component
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
                     <Layout>
                       <Page />
                     </Layout>
-                  </PrivateRoute>
-                }
-              >
-                {route.path === config.routes.admin &&
-                  adminRoutes.map((childRoute, i) => {
-                    const Manage = childRoute.component
-                    return <Route key={i} path={childRoute.path} element={<Manage />} />
-                  })}
-              </Route>
-            )
-          })}
-        </Routes>
-      </div>
-      <ToastContainer autoClose={1200} />
-    </Router>
+                  }
+                />
+              )
+            })}
+            {privateRoutes.map((route, index) => {
+              let Layout = route.layout
+              const Page = route.component
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <PrivateRoute>
+                      <Layout>
+                        <Page />
+                      </Layout>
+                    </PrivateRoute>
+                  }
+                >
+                  {route.path === config.routes.admin &&
+                    adminRoutes.map((childRoute, i) => {
+                      const Manage = childRoute.component
+                      return <Route key={i} path={childRoute.path} element={<Manage />} />
+                    })}
+                </Route>
+              )
+            })}
+          </Routes>
+        </div>
+        <ToastContainer autoClose={1200} />
+      </Router>
+    </Suspense>
   )
 }
 

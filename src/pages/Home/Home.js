@@ -4,18 +4,21 @@ import { useSelector } from 'react-redux'
 import videoHome from '~/assets/videos/homepage.mp4'
 import Button from '~/components/Button'
 import config from '~/config'
+import { useTranslation } from 'react-i18next'
 
 const cx = classNames.bind(styles)
 
 function Home() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
+  const { t } = useTranslation()
+
   return (
     <>
       <div className={cx('home')}>
         <div className={cx('containerFlex')}>
           <div className={cx('containerGrid')}>
             <div className={cx('containerText')}>
-              <h1>There's a better way to ask</h1>
+              <h1>{t('home.heading')}</h1>
               <p>
                 You don't want to make a boring form. And your audience won't answer one. Create a
                 typeform instead—and make everyone happy.

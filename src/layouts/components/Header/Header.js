@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { doLogout } from '~/redux/actions/userAction'
 import { useDispatch } from 'react-redux'
+import Language from './Language'
 
 const cx = classNames.bind(styles)
 
@@ -49,6 +50,7 @@ function Header() {
           </Link>
         </div>
         <div className={cx('navbar-actions')}>
+          <Language />
           {isAuthenticated ? (
             <>
               <Button to={config.routes.profile} outline>
