@@ -5,6 +5,9 @@
   },
   "home": {
     "heading": "There's a better way to ask",
-    "description": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead—and make everyone happy."
+    "description": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead—and make everyone happy.",
+    "button": "Doing Quiz Now",
+    "card": "No credit card required",
+    "time": "No time limit on Free plan"
   }
 }

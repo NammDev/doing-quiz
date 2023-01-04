@@ -23,7 +23,7 @@ function Home() {
               <div className={cx('containerText-button')}>
                 {isAuthenticated ? (
                   <Button to={config.routes.profile} primary className={cx('btn')}>
-                    Doing Quiz Now
+                    {t('home.button')}
                   </Button>
                 ) : (
                   <Button to={config.routes.login} primary className={cx('btn')}>
@@ -35,11 +35,11 @@ function Home() {
                 <ul className={cx('required-list')}>
                   <li className={cx('required-item')}>
                     <div className={cx('required-icon')}>✓</div>
-                    <div className={cx('required-text')}>No credit card required</div>
+                    <div className={cx('required-text')}>{t('home.card')}</div>
                   </li>
                   <li className={cx('required-item')}>
                     <div className={cx('required-icon')}>✓</div>
-                    <div className={cx('required-text')}>No time limit on Free plan</div>
+                    <div className={cx('required-text')}>{t('home.time')}</div>
                   </li>
                 </ul>
               </div>
