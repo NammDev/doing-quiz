@@ -114,6 +114,10 @@ function Quiz() {
     submitQuestion(payload)
   }
 
+  const handleOnClick = (i) => {
+    setCurrentQuestion(i)
+  }
+
   return (
     <div className={cx('quiz-page')}>
       <div className='container'>
@@ -150,8 +154,9 @@ function Quiz() {
           <div className={cx('right')}>
             <Countdown
               currentQuestion={currentQuestion}
-              setCurrentQuestion={setCurrentQuestion}
               listQuestion={listQuestion}
+              handleOnClick={handleOnClick}
+              onTimeUp={handleSubmit}
             />
             <ButtonComponent className={cx('btn', 'right-footer')} onClick={handleSubmit}>
               Submit Exam

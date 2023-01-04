@@ -1,6 +1,5 @@
 import styles from './Question.module.scss'
 import classNames from 'classnames/bind'
-import { useState } from 'react'
 import images from '~/assets/images'
 
 const cx = classNames.bind(styles)

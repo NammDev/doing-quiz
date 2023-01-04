@@ -21,7 +21,7 @@
     }
   }
   &-list {
-    padding: 16px;
+    padding: 16px 21px;
     display: flex;
     justify-content: flex-start;
     gap: 5%;
@@ -52,4 +52,10 @@
       transform: scale(1.1);
     }
   }
+}
+
+.isAnswer {
+  border-color: gray;
+  background-color: #d6d3d3;
+  opacity: 0.7;
 }
