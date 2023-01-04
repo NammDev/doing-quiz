@@ -1,4 +1,4 @@
-import { FETCH_USER_LOGIN_SUCCESS } from '../actions/userAction'
+import { FETCH_USER_LOGIN_SUCCESS, CLEAR_DATA_USER_LOGOUT_SUCCESS } from '../actions/userAction'
 
 const initialState = {
   isAuthenticated: false,
@@ -21,6 +21,13 @@ const userReducer = (state = initialState, { type, payload }) => {
         account: { ...payload },
       }
     }
+    case CLEAR_DATA_USER_LOGOUT_SUCCESS:
+      console.log(CLEAR_DATA_USER_LOGOUT_SUCCESS)
+      return {
+        ...state,
+        isAuthenticated: false,
+        account: { ...initialState.account },
+      }
     default:
       return state
   }

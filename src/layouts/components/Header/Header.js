@@ -5,12 +5,29 @@ import { Logo } from '~/assets/svg'
 import Button from '~/components/Button'
 import config from '~/config'
 import { useSelector } from 'react-redux'
+import { postLogout } from '~/services/auth'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { doLogout } from '~/redux/actions/userAction'
+import { useDispatch } from 'react-redux'
 
 const cx = classNames.bind(styles)
 
 function Header() {
   const user = useSelector((state) => state.user)
   const { isAuthenticated, account } = user
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleLogout = async () => {
+    const res = await postLogout(account.email, account.refresh_token)
+    if (res && res.EC === 0) {
+      dispatch(doLogout())
+      navigate('/login')
+    } else {
+      toast.error(res.EM)
+    }
+  }
 
   return (
     <div className={cx('header')}>
@@ -37,7 +54,7 @@ function Header() {
               <Button to={config.routes.profile} outline>
                 {account.username}
               </Button>
-              <Button to={config.routes.register} primary>
+              <Button onClick={handleLogout} primary>
                 Logout
               </Button>
             </>
