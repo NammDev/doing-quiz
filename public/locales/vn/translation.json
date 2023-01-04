@@ -1,5 +1,10 @@
 {
+  "heading": {
+    "language-vn": "Tiếng Việt",
+    "language-en": "English"
+  },
   "home": {
-    "heading": "Luôn có cách tuyệt vời để ghi nhớ"
+    "heading": "Luôn có cách tuyệt vời để ghi nhớ",
+    "description": "Xin chào Vợ Yêu"
   }
 }

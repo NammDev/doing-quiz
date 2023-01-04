@@ -1,5 +1,10 @@
 {
+  "heading": {
+    "language-vn": "Tiếng Việt",
+    "language-en": "English"
+  },
   "home": {
-    "heading": "There's a better way to ask"
+    "heading": "There's a better way to ask",
+    "description": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead—and make everyone happy."
   }
 }

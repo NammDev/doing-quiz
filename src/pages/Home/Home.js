@@ -19,10 +19,7 @@ function Home() {
           <div className={cx('containerGrid')}>
             <div className={cx('containerText')}>
               <h1>{t('home.heading')}</h1>
-              <p>
-                You don't want to make a boring form. And your audience won't answer one. Create a
-                typeform instead—and make everyone happy.
-              </p>
+              <p>{t('home.description')}</p>
               <div className={cx('containerText-button')}>
                 {isAuthenticated ? (
                   <Button to={config.routes.profile} primary className={cx('btn')}>
