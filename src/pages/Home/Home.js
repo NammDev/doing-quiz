@@ -1,14 +1,13 @@
-// import styles from './Home.module.scss'
-// import classNames from 'classnames/bind'
-import { Button } from 'react-bootstrap'
+import styles from './Home.module.scss'
+import classNames from 'classnames/bind'
 
-// const cx = classNames.bind(styles)
+const cx = classNames.bind(styles)
 
 function Home() {
   return (
-    <Button as='a' variant='success'>
-      Button as link
-    </Button>
+    <div className={cx('home')}>
+      <h1>Say Hi</h1>
+    </div>
   )
 }
 
