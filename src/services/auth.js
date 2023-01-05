@@ -25,6 +25,14 @@ export const postLogout = async (email, refresh_token) => {
   return res
 }
 
+export const postRefreshToken = async (email, refresh_token) => {
+  const res = await axios.post(`/refresh-token`, {
+    email,
+    refresh_token,
+  })
+  return res
+}
+
 export const getOverview = async () => {
   const res = await axios.get(`/overview`)
   return res
