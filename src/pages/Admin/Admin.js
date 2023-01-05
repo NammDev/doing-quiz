@@ -8,9 +8,7 @@ const cx = classNames.bind(styles)
 function Admin() {
   return (
     <div className={cx('admin')}>
-      <div className={cx('manage')}>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   )
 }

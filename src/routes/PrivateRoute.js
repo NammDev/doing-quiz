@@ -12,4 +12,4 @@ function PrivateRoute({ children }) {
   return children
 }
 
-export { PrivateRoute }
+export default PrivateRoute

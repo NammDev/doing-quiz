@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { publicRoutes, adminRoutes, privateRoutes } from '~/routes'
+import { publicRoutes, adminRoutes, privateRoutes, PrivateRoute } from '~/routes'
 import classNames from 'classnames/bind'
 import styles from './App.module.scss'
 import config from '~/config'
 import { ToastContainer } from 'react-toastify'
-import { PrivateRoute } from './routes/PrivateRoute'
 import { Suspense } from 'react'
 
 const cx = classNames.bind(styles)
