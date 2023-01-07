@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form'
 import classNames from 'classnames/bind'
-import styles from './ModalUpdateQuiz.module.scss'
+import styles from './Modal.module.scss'
 import { ModalComponent } from '~/components/ModalComponent'
 import Select from 'react-select'
 import { useState, useEffect, useRef } from 'react'

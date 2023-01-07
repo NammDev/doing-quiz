@@ -5,12 +5,17 @@ import styles from './TableQuiz.module.scss'
 import { useState, useEffect } from 'react'
 import { getAllQuizForAdmin } from '~/services/quiz'
 import ModalUpdateQuiz from './ModalUpdateQuiz'
+import ModalDeleteQuiz from './ModalDeleteQuiz'
 
 const cx = classNames.bind(styles)
 
 function TableQuiz() {
   const [listQuiz, setListQuiz] = useState([])
+
   const [showModalUpdate, setShowModalUpdate] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
+
+  const [dataDelete, setDataDelete] = useState({})
   const [dataUpdate, setDataUpdate] = useState({})
 
   const fetchAPI = async () => {
@@ -29,8 +34,9 @@ function TableQuiz() {
     setDataUpdate(quiz)
   }
 
-  const handleClickDelete = () => {
-    console.log('Delete')
+  const handleClickDelete = (quiz) => {
+    setShowModalDelete(true)
+    setDataDelete(quiz)
   }
 
   return (
@@ -67,7 +73,7 @@ function TableQuiz() {
                     <li>
                       <TiDelete
                         size={20}
-                        onClick={handleClickDelete}
+                        onClick={() => handleClickDelete(quiz)}
                         className='hover-big'
                         style={{ color: 'red' }}
                       />
@@ -82,6 +88,12 @@ function TableQuiz() {
         show={showModalUpdate}
         setShow={setShowModalUpdate}
         data={dataUpdate}
+        reRender={fetchAPI}
+      />
+      <ModalDeleteQuiz
+        show={showModalDelete}
+        setShow={setShowModalDelete}
+        data={dataDelete}
         reRender={fetchAPI}
       />
     </>

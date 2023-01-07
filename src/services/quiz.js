@@ -45,3 +45,8 @@ export const postUpsertQA = async (data) => {
   const res = await axios.post(`/quiz-upsert-qa`, { ...data })
   return res
 }
+
+export const deleteQuiz = async (id) => {
+  const res = await axios.delete(`/quiz/${id}`)
+  return res
+}
