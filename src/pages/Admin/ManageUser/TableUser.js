@@ -22,8 +22,8 @@ function TableUser({ listUsers, onUpdate, onDelete, pageCount, handlePageClick, 
         <tbody>
           {listUsers &&
             listUsers.length > 0 &&
-            listUsers.map((user, index) => (
-              <tr key={user.id}>
+            listUsers.map((user) => (
+              <tr key={user.id} onClick={() => onUpdate(user)}>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>

@@ -55,7 +55,7 @@ function TableQuiz() {
           {listQuiz &&
             listQuiz.length > 0 &&
             listQuiz.map((quiz) => (
-              <tr key={quiz.id}>
+              <tr key={quiz.id} onClick={() => handleClickUpdate(quiz)}>
                 <td>{quiz.id}</td>
                 <td>{quiz.name}</td>
                 <td>{quiz.description}</td>

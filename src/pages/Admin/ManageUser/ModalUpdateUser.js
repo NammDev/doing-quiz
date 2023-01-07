@@ -81,7 +81,7 @@ function ModalUpdateUser({ show, setShow, data, reRender }) {
 
         <Form.Group className={cx('form-group-half')} controlId='userPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' disabled placeholder='Password' />
+          <Form.Control type='password' disabled placeholder='Password' autoComplete='on' />
         </Form.Group>
 
         <Form.Group className={cx('form-group-half')} controlId='userName'>
