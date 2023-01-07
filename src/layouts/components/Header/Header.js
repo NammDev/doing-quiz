@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { doLogout } from '~/redux/actions/userAction'
 import { useDispatch } from 'react-redux'
-import Language from './Language'
+import UserDropdown from './UserDropdown/UserDropdown'
 
 const cx = classNames.bind(styles)
 
@@ -50,16 +50,8 @@ function Header() {
           </Link>
         </div>
         <div className={cx('navbar-actions')}>
-          <Language />
           {isAuthenticated ? (
-            <>
-              <Button to={config.routes.profile} outline>
-                {account.username}
-              </Button>
-              <Button onClick={handleLogout} primary>
-                Logout
-              </Button>
-            </>
+            <UserDropdown onLogout={handleLogout} account={account} />
           ) : (
             <>
               <Button to={config.routes.login} outline>

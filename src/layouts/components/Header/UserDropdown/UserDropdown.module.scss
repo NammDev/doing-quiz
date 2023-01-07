@@ -1,0 +1,149 @@
+.profile {
+  position: relative;
+  &:hover .dropdown {
+    display: block;
+  }
+}
+
+.image {
+  width: 42px;
+  height: 42px;
+  background: center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url(https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1658379194980357~c5_720x720.jpeg?x-expires=1673226000&x-signature=KlfocvCHlfYmuZ%2FlcGVO9fjacvA%3D);
+}
+
+.dropdown {
+  background-color: rgb(255, 255, 255);
+  color: rgb(38, 38, 39);
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
+  padding: 8px 0px;
+  min-width: 276px;
+  max-width: 276px;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0px;
+  position: absolute;
+  right: -24px;
+  top: 48px;
+  display: none;
+  transition: all 0.3s linear;
+  &::before {
+    content: '';
+    display: block;
+    top: 0;
+    width: 100%;
+    height: 24px;
+    position: absolute;
+    top: -24px;
+  }
+  &-avatar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    padding: 4px 16px 12px;
+    &-username {
+      display: block;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex-shrink: 1;
+      width: 160px;
+    }
+    &-email {
+      display: block;
+      font-size: 12px;
+      line-height: 18px;
+      color: rgb(115, 115, 115);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex-shrink: 1;
+    }
+  }
+  &-content {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    &-heading {
+      display: block;
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: 4px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 8px 16px 4px;
+      text-transform: uppercase;
+    }
+    &-link {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      appearance: none;
+      margin: 0px;
+      background: none rgb(255, 255, 255);
+      border: none;
+      max-width: 100%;
+      text-align: left;
+      color: inherit;
+      cursor: pointer;
+      padding: 0px 16px;
+      min-height: 32px;
+      text-decoration: none;
+      outline: none;
+      width: 100%;
+      &:hover {
+        background-color: rgb(240, 240, 240);
+      }
+      div {
+        display: block;
+        font-size: 14px;
+        line-height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1 1 auto;
+      }
+    }
+  }
+  &-logout {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    appearance: none;
+    margin: 0px;
+    background: none rgb(255, 255, 255);
+    border: none;
+    max-width: 100%;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+    padding: 0px 16px;
+    min-height: 32px;
+    text-decoration: none;
+    outline: none;
+    width: 100%;
+    div {
+      display: block;
+      font-size: 14px;
+      line-height: 20px;
+      color: rgb(175, 4, 4);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1 1 auto;
+    }
+  }
+}
