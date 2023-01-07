@@ -89,7 +89,7 @@ function QuestionAnswer({ onClickQuestion, data, onClickAnswer, onChange }) {
           onClick={() => onClickQuestion('REMOVE', data.id)}
         />
         <div>
-          <HiOutlineDocumentDuplicate onClick={() => onClickQuestion('COPY', data.id)} />
+          <HiOutlineDocumentDuplicate onClick={() => onClickQuestion('COPY', data)} />
           <RiAddCircleLine style={{ color: 'green' }} onClick={() => onClickQuestion('ADD')} />
         </div>
       </div>

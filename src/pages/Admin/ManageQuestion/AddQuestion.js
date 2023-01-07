@@ -57,19 +57,21 @@ function AddQuestion() {
     fetchApi()
   }, [])
 
-  const handleQuestion = (type, id) => {
+  const handleQuestion = (type, payload) => {
     switch (type) {
       case 'ADD':
-        const newQuestion = { ...NEW_QUESTION, id: uuidv4() }
+        const newQuestion = { ...NEW_QUESTION, payload: uuidv4() }
         setQuestions((state) => [...state, newQuestion])
         break
       case 'REMOVE':
         if (questions.length > 1) {
-          setQuestions((state) => state.filter((item) => item.id !== id))
+          setQuestions((state) => state.filter((item) => item.payload !== payload))
         }
         break
       case 'COPY':
-        console.log(id)
+        const copyQuestion = { ...payload }
+        payload.id = uuidv4()
+        setQuestions((state) => [...state, copyQuestion])
         break
       default:
         break
