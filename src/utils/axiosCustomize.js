@@ -46,10 +46,14 @@ instance.interceptors.response.use(
       const refresh_token = store?.getState()?.user?.account?.refresh_token
       const data = await postRefreshToken(email, refresh_token)
 
+      console.log(email, refresh_token)
       // Redux
       // dispatch(doLogin(data.DT))
       if (data && data.EC === 0) {
         dispatch(doLogin(data.DT))
+      } else {
+        window.location.href = '/login'
+        return
       }
 
       return instance(originalRequest)

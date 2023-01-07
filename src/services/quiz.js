@@ -25,6 +25,17 @@ export const postQuiz = async (description, name, difficulty, quizImage) => {
   return res
 }
 
+export const putQuiz = async (id, description, name, difficulty, quizImage) => {
+  const form = new FormData()
+  form.append('id', id)
+  form.append('description', description)
+  form.append('name', name)
+  form.append('difficulty', difficulty)
+  form.append('quizImage', quizImage)
+  const res = await axios.put(`/quiz`, form)
+  return res
+}
+
 export const postAssignQuizForUser = async (quizId, userId) => {
   const res = await axios.post(`/quiz-assign-to-user`, { quizId, userId })
   return res
