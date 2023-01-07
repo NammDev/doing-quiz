@@ -6,8 +6,8 @@
 }
 
 .image {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   background: center no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
@@ -49,6 +49,10 @@
     grid-template-columns: auto 1fr;
     column-gap: 12px;
     padding: 4px 16px 12px;
+    .dropdown-image {
+      width: 32px;
+      height: 32px;
+    }
     &-username {
       display: block;
       font-size: 14px;

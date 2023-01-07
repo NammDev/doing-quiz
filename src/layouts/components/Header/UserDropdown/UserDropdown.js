@@ -3,6 +3,7 @@ import styles from './UserDropdown.module.scss'
 import config from '~/config'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import images from '~/assets/images'
 
 const cx = classNames.bind(styles)
 
@@ -14,11 +15,33 @@ function UserDropdown({ onLogout, account }) {
   }
   return (
     <div className={cx('profile')}>
-      <div className={cx('image')}></div>
+      <div
+        className={cx('image')}
+        style={
+          account.image
+            ? {
+                backgroundImage: `url(data:image/jpeg;base64,${account.image})`,
+              }
+            : {
+                backgroundImage: `url(${images.noImage})`,
+              }
+        }
+      ></div>
       <ul className={cx('dropdown')}>
         <Link className={cx('dropdown-avatar')} to={config.routes.profile}>
           <div className={cx('dropdown-avatar-image')}>
-            <div className={cx('image')}></div>
+            <div
+              className={cx('image', 'dropdown-image')}
+              style={
+                account.image
+                  ? {
+                      backgroundImage: `url(data:image/jpeg;base64,${account.image})`,
+                    }
+                  : {
+                      backgroundImage: `url(${images.noImage})`,
+                    }
+              }
+            ></div>
           </div>
           <div>
             <div className={cx('dropdown-avatar-username')}>{account.username}</div>
