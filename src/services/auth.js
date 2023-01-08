@@ -45,3 +45,8 @@ export const postChangePassword = async (current_password, new_password) => {
   })
   return res
 }
+
+export const getHistory = async () => {
+  const res = await axios.get(`/history`)
+  return res
+}

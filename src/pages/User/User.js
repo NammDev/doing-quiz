@@ -4,12 +4,13 @@ import styles from './User.module.scss'
 import classNames from 'classnames/bind'
 import UserUpdatePass from './UserUpdatePass'
 import { useSelector } from 'react-redux'
+import UserHistory from './UserHistory'
 
 const cx = classNames.bind(styles)
 
 function User({ show, setShow }) {
-  const user = useSelector((state) => state.user)
-  const { isAuthenticated, account } = user
+  const user = useSelector((state) => state.user.account)
+  const { account } = user
 
   const [key, setKey] = useState('profile')
 
@@ -33,7 +34,7 @@ function User({ show, setShow }) {
               <UserUpdatePass account={account} />
             </Tab>
             <Tab eventKey='history' title='History'>
-              Home3
+              <UserHistory />
             </Tab>
           </Tabs>
         </>

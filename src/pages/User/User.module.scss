@@ -1,3 +1,5 @@
+@import 'src/components/GlobalStyles/_variables.scss';
+
 // User
 
 // User Profile
@@ -64,3 +66,40 @@
 }
 
 // User History
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  tr {
+    text-align: center;
+  }
+  th {
+    background-color: $color-brand;
+    text-align: left;
+    font-weight: bold;
+    text-align: center;
+  }
+  th,
+  td {
+    padding: 12px 15px;
+  }
+  tbody tr {
+    border-bottom: 1px solid #dddddd;
+    &:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+    &:last-of-type {
+      border-bottom: 2px solid $color-brand;
+    }
+    &:hover {
+      cursor: pointer;
+      color: $color-brand;
+    }
+  }
+}
