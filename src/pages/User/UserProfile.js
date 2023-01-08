@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { updateUser } from '~/services/users'
 import ButtonComponent from '~/components/Button/Button'
 import images from '~/assets/images'
+import { getAllUsers } from '~/services/users'
 
 const cx = classNames.bind(styles)
 
@@ -16,7 +17,28 @@ function UserProfile({ data }) {
   const [previewImage, setPreviewImage] = useState('')
   const [imageUpload, setImageUpload] = useState('')
 
+  const [listUsers, setListUsers] = useState([])
+
+  const fetchApi = async (page) => {
+    const res = await getAllUsers()
+    if (res.EC === 0) {
+      setListUsers(res.DT)
+    }
+  }
+
+  async function urltoFile(url, filename, mimeType) {
+    mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1]
+    const res = await fetch(url)
+    const buf = await res.arrayBuffer()
+    return new File([buf], filename, { type: mimeType })
+  }
+
   useEffect(() => {
+    fetchApi()
+    async function changeFile(image, username) {
+      const imageFile = await urltoFile(`data:image/png;base64,${image}`, `Avatar-${username}.png`)
+      setImageUpload(imageFile)
+    }
     const isEmpty = Object.keys(data).length === 0
     if (!isEmpty) {
       const { email, username, role, image } = data
@@ -24,6 +46,7 @@ function UserProfile({ data }) {
       setUserName(username)
       setRole(role)
       image && setPreviewImage(`data:image/jpeg;base64,${image}`)
+      changeFile(image, username)
     }
   }, [])
 
@@ -36,8 +59,8 @@ function UserProfile({ data }) {
     }
   }
 
-  const updateApi = async () => {
-    const res = await updateUser(data.id, userName, role, imageUpload)
+  const updateApi = async (userId) => {
+    const res = await updateUser(userId, userName, role, imageUpload)
     if (res && res.EC === 0) {
       toast.success(res.EM)
     } else {
@@ -57,7 +80,8 @@ function UserProfile({ data }) {
   }
 
   const handleSubmitUpdateUser = () => {
-    validate(email, userName) && updateApi()
+    const userId = listUsers.find((u) => u.email === data.email).id
+    validate(email, userName) && updateApi(userId)
   }
 
   return (
