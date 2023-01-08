@@ -5,22 +5,18 @@ import classNames from 'classnames/bind'
 import UserUpdatePass from './UserUpdatePass'
 import { useSelector } from 'react-redux'
 import UserHistory from './UserHistory'
+import UserProfile from './UserProfile'
 
 const cx = classNames.bind(styles)
 
 function User({ show, setShow }) {
-  const user = useSelector((state) => state.user.account)
+  const user = useSelector((state) => state.user)
   const { account } = user
 
   const [key, setKey] = useState('profile')
 
   return (
-    <Modal
-      backdrop='static'
-      show={show}
-      onHide={() => setShow(false)}
-      dialogClassName={'modal-60w'}
-    >
+    <Modal show={show} onHide={() => setShow(false)} dialogClassName={'modal-60w'}>
       <Modal.Header closeButton>
         <Modal.Title>Quản Lý Thông Tin Người Dùng</Modal.Title>
       </Modal.Header>
@@ -28,7 +24,7 @@ function User({ show, setShow }) {
         <>
           <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
             <Tab eventKey='profile' title='User Information'>
-              Home
+              <UserProfile data={account} />
             </Tab>
             <Tab eventKey='password' title='Change Password'>
               <UserUpdatePass account={account} />

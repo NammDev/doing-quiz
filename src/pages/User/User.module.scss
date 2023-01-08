@@ -3,9 +3,44 @@
 // User
 
 // User Profile
+.form {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  .form-group-full {
+    flex-basis: 100%;
+    padding: 8px 0;
+  }
+  .form-group-half {
+    flex-basis: 45%;
+    padding: 8px 0;
+  }
+}
+
+.container-img {
+  margin-top: 12px;
+
+  .img {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 12px;
+    aspect-ratio: 2 / 1;
+    object-fit: contain;
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
+  }
+}
+
+.role-image {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-start;
+}
 
 // User Update Password
 .update-pass {
+  margin-top: 16px;
   &-form {
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +61,7 @@
   font-size: 16px;
   line-height: 24px;
   width: 100%;
-  padding: 7px 10px 7px 0;
+  padding: 8px 10px 8px 0;
 }
 
 .inputSpan {
@@ -68,7 +103,7 @@
 // User History
 .content-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 24px 0;
   font-size: 0.9em;
   min-width: 400px;
   width: 100%;
