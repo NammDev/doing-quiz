@@ -7,6 +7,7 @@ import { updateUser } from '~/services/users'
 import ButtonComponent from '~/components/Button/Button'
 import images from '~/assets/images'
 import { getAllUsers } from '~/services/users'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 
@@ -63,6 +64,7 @@ function UserProfile({ data }) {
     const res = await updateUser(userId, userName, role, imageUpload)
     if (res && res.EC === 0) {
       toast.success(res.EM)
+      window.location.href = config.routes.home
     } else {
       toast.error(res.EM)
     }

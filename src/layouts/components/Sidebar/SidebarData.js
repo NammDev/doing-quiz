@@ -10,7 +10,7 @@ const cx = classnames.bind(styles)
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: '/admin',
+    path: '/admin/dashboard',
     icon: <IoIcons.IoIosPaper />,
   },
   {
