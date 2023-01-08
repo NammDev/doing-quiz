@@ -37,3 +37,11 @@ export const getOverview = async () => {
   const res = await axios.get(`/overview`)
   return res
 }
+
+export const postChangePassword = async (current_password, new_password) => {
+  const res = await axios.post(`/change-password`, {
+    current_password,
+    new_password,
+  })
+  return res
+}

@@ -2,10 +2,15 @@ import { useState } from 'react'
 import { Modal, Tabs, Tab } from 'react-bootstrap'
 import styles from './User.module.scss'
 import classNames from 'classnames/bind'
+import UserUpdatePass from './UserUpdatePass'
+import { useSelector } from 'react-redux'
 
 const cx = classNames.bind(styles)
 
 function User({ show, setShow }) {
+  const user = useSelector((state) => state.user)
+  const { isAuthenticated, account } = user
+
   const [key, setKey] = useState('profile')
 
   return (
@@ -25,7 +30,7 @@ function User({ show, setShow }) {
               Home
             </Tab>
             <Tab eventKey='password' title='Change Password'>
-              Home2
+              <UserUpdatePass account={account} />
             </Tab>
             <Tab eventKey='history' title='History'>
               Home3

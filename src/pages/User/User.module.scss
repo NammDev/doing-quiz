@@ -3,5 +3,64 @@
 // User Profile
 
 // User Update Password
+.update-pass {
+  &-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .group {
+      flex-basis: 46%;
+      margin-bottom: 12px;
+    }
+  }
+  &-btn {
+    margin-top: 12px;
+  }
+}
+
+.label {
+  font-weight: 400;
+  color: rgb(38, 38, 39);
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+  padding: 7px 10px 7px 0;
+}
+
+.inputSpan {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  height: 40px;
+  display: inline-block;
+  border-radius: 4px;
+  width: 100%;
+  input {
+    height: 100%;
+    width: 100%;
+    padding: 6px 14px;
+    line-height: 16px;
+    border: none;
+    margin: 0;
+    background: transparent;
+    color: #5e5e5e;
+    font-size: 14px;
+    &:focus {
+      box-shadow: 0 0 8px #51cbee;
+      outline: 0;
+    }
+  }
+  .show-password {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    padding: 6px 8px;
+    cursor: pointer;
+    opacity: 1;
+    top: 3px;
+    right: 0;
+    opacity: 0.8;
+  }
+}
 
 // User History
