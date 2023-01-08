@@ -11,7 +11,7 @@ function SubMenu({ item }) {
   const showSubMenu = () => setSubMenu(!subMenu)
 
   return (
-    <>
+    <div className='submenu'>
       <NavLink
         to={item.path}
         className={cx('menu-item', item.subMenu && 'disabled-active')}
@@ -36,7 +36,7 @@ function SubMenu({ item }) {
           ))}
         </ul>
       )}
-    </>
+    </div>
   )
 }
 

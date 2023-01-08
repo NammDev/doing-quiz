@@ -25,13 +25,17 @@ function Quiz() {
   const [isShowModal, SetIsShowModal] = useState(false)
   const [dataModal, setDataModal] = useState({})
 
+  const [isShowAnswer, setIsShowAnswer] = useState(false)
+  const [disableSubmit, setDisableSubmit] = useState(false)
+  const [isStop, setIsStop] = useState(false)
+
   const fetchQuestion = async () => {
     const data = await getQuestionByQuiz(quizId)
     if (data && data.EC === 0) {
       const listQuiz = _.chain(data.DT)
         .groupBy('id')
         .map((value, key) => ({
-          answers: value.map((quiz) => ({ ...quiz.answers, isSelected: false })),
+          answers: value.map((quiz) => ({ ...quiz.answers, isSelected: false, isCorrect: false })),
           description: value[0].description,
           id: key,
           image: value[0].image,
@@ -112,10 +116,32 @@ function Quiz() {
       answers,
     }
     submitQuestion(payload)
+    setDisableSubmit(true)
+    setIsStop(true)
   }
 
   const handleOnClick = (i) => {
     setCurrentQuestion(i)
+  }
+
+  const handleShowAnswer = () => {
+    SetIsShowModal(false)
+    setIsShowAnswer(true)
+    const result = dataModal.quizData.map((quiz) => ({
+      id: quiz.questionId,
+      correctAnswer: quiz.systemAnswers[0].id,
+    }))
+    const cloneListQuestion = _.cloneDeep(listQuestion)
+    for (let i = 0; i < cloneListQuestion.length; i++) {
+      if (cloneListQuestion[i].id == result[i].id) {
+        cloneListQuestion[i].answers.forEach((a) => {
+          if (a.id === result[i].correctAnswer) {
+            a.isCorrect = true
+          }
+        })
+      }
+    }
+    setListQuestion(cloneListQuestion)
   }
 
   return (
@@ -133,6 +159,7 @@ function Quiz() {
               question={listQuestion.length > 0 ? listQuestion[currentQuestion] : {}}
               id={currentQuestion + 1}
               handleClickRadio={handleClickRadio}
+              isShowAnswer={isShowAnswer}
             />
             <div className={cx('left-footer')}>
               <ButtonComponent
@@ -157,14 +184,24 @@ function Quiz() {
               listQuestion={listQuestion}
               handleOnClick={handleOnClick}
               onTimeUp={handleSubmit}
+              isStop={isStop}
             />
-            <ButtonComponent className={cx('btn', 'right-footer')} onClick={handleSubmit}>
-              Submit Exam
+            <ButtonComponent
+              disabled={isShowAnswer}
+              className={cx('btn', 'right-footer')}
+              onClick={disableSubmit ? handleShowAnswer : handleSubmit}
+            >
+              {disableSubmit ? 'Show Answer' : 'Submit Exam'}
             </ButtonComponent>
           </div>
         </div>
       </div>
-      <ModalAnswer show={isShowModal} setShow={SetIsShowModal} data={dataModal} />
+      <ModalAnswer
+        show={isShowModal}
+        setShow={SetIsShowModal}
+        data={dataModal}
+        handleShowAnswer={handleShowAnswer}
+      />
     </div>
   )
 }

@@ -1,10 +1,11 @@
 import styles from './Question.module.scss'
 import classNames from 'classnames/bind'
 import images from '~/assets/images'
+import { HiX, HiOutlineCheck } from 'react-icons/hi'
 
 const cx = classNames.bind(styles)
 
-function Question({ question, id, handleClickRadio }) {
+function Question({ question, id, handleClickRadio, isShowAnswer }) {
   const handleOnClick = (e, answerSelected) => {
     handleClickRadio(answerSelected)
   }
@@ -24,7 +25,11 @@ function Question({ question, id, handleClickRadio }) {
           {question?.answers?.map((answer) => (
             <label
               key={answer.id}
-              className={cx('question-body-answer', answer.isSelected && 'active')}
+              className={cx(
+                'question-body-answer',
+                answer.isSelected && 'active',
+                isShowAnswer && 'afterSubmit'
+              )}
             >
               <input
                 type='checkbox'
@@ -33,6 +38,15 @@ function Question({ question, id, handleClickRadio }) {
                 onChange={(e) => handleOnClick(e, answer.id)}
               />
               <span className={cx('checkmark')}>{answer.description}</span>
+              {isShowAnswer && (
+                <span>
+                  {answer.isCorrect ? (
+                    <HiOutlineCheck className={cx('check')} />
+                  ) : (
+                    <HiX className={cx('xmark')} />
+                  )}
+                </span>
+              )}
             </label>
           ))}
         </div>

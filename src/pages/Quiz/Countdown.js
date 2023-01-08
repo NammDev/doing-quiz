@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 
 const cx = classNames.bind(styles)
 
-function Countdown({ listQuestion, currentQuestion, handleOnClick, onTimeUp }) {
+function Countdown({ listQuestion, currentQuestion, handleOnClick, onTimeUp, isStop }) {
   const [timeLeft, setTimeLeft] = useState(360)
 
   useEffect(() => {
@@ -16,6 +16,9 @@ function Countdown({ listQuestion, currentQuestion, handleOnClick, onTimeUp }) {
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1)
     }, 1000)
+    if (isStop) {
+      clearInterval(intervalId)
+    }
     return () => clearInterval(intervalId)
   }, [timeLeft])
 

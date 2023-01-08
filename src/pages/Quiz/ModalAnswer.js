@@ -1,20 +1,13 @@
 import { ModalComponent } from '~/components/ModalComponent'
 
-function ModalAnswer({ show, setShow, data }) {
-  const handleSubmit = () => {
-    const result = data.quizData.map((quiz) => ({
-      quiz: quiz.questionId,
-      correctAnswer: quiz.systemAnswers[0].description,
-    }))
-    console.log(result.map((res) => console.log(res)))
-  }
+function ModalAnswer({ show, setShow, data, handleShowAnswer }) {
   return (
     <ModalComponent
       heading={'Your Result'}
       footer={'Show Answer'}
       show={show}
       onClose={() => setShow(false)}
-      onSubmit={handleSubmit}
+      onSubmit={handleShowAnswer}
     >
       <h4>
         {data.countCorrect} / {data.countTotal}

@@ -1,5 +1,5 @@
 // Sidebar Active Link
-.active {
+.submenu .active {
   > div {
     background: $color-second;
     color: #d79417;
@@ -68,4 +68,10 @@
       box-shadow: unset;
     }
   }
+}
+
+// Modal for User
+.modal-60w {
+  max-width: 60vw;
+  margin-top: 88px;
 }
