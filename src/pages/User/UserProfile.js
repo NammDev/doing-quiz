@@ -107,17 +107,7 @@ function UserProfile({ data }) {
         <div className={cx('role-image')}>
           <Form.Group className={cx('form-group-half')} controlId='userRole'>
             <Form.Label>Role</Form.Label>
-            <Form.Select
-              value={role}
-              onChange={(e) => {
-                setRole(e.target.value)
-              }}
-            >
-              <option default value='USER'>
-                USER
-              </option>
-              <option value='ADMIN'>ADMIN</option>
-            </Form.Select>
+            <Form.Control disabled type='text' value={role} />
           </Form.Group>
 
           <Form.Group className={cx('form-group-half', 'item-start')} controlId='userImage'>
